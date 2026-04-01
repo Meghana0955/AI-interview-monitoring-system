@@ -1,0 +1,13 @@
+# Node modules
+Frontend/node_modules/
+node_modules/
+
+# Python env
+env/
+__pycache__/
+
+# Next.js build
+Frontend/.next/
+
+# Logs
+*.log

@@ -1,0 +1,108 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-space: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #080c14;
+  color: #e2e8f0;
+  font-family: var(--font-space);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #243655; border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: #3b82f6; }
+
+/* Grid background utility */
+.bg-grid {
+  background-image: linear-gradient(rgba(30,45,71,.35) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(30,45,71,.35) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Glassmorphism card */
+.glass {
+  background: rgba(15, 23, 36, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Neon glow utilities */
+.glow-cyan  { box-shadow: 0 0 20px rgba(6, 182, 212, 0.15); }
+.glow-blue  { box-shadow: 0 0 20px rgba(59, 130, 246, 0.15); }
+.glow-red   { box-shadow: 0 0 20px rgba(239, 68, 68, 0.15); }
+
+/* Animated elements */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-20px); }
+}
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+@keyframes scanCross {
+  0%   { transform: translate(-20px, -20px); opacity: 0.6; }
+  33%  { transform: translate(20px, -20px);  opacity: 0.4; }
+  66%  { transform: translate(20px, 20px);   opacity: 0.6; }
+  100% { transform: translate(-20px, -20px); opacity: 0.6; }
+}
+@keyframes ringExpand {
+  0%   { width: 40px; height: 40px; margin: -20px; opacity: 0.8; }
+  100% { width: 120px; height: 120px; margin: -60px; opacity: 0; }
+}
+@keyframes audioWave {
+  to { width: 75%; }
+}
+@keyframes slideInRight {
+  from { transform: translateX(100%); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-float       { animation: float 8s ease-in-out infinite; }
+.animate-pulse-dot   { animation: pulseDot 2s infinite; }
+.animate-scan        { animation: scanCross 3s ease-in-out infinite; }
+.animate-ring        { animation: ringExpand 2s ease-out infinite; }
+.animate-audio       { animation: audioWave 1.2s ease-in-out infinite alternate; }
+.animate-slide-right { animation: slideInRight 0.3s ease-out; }
+.animate-fade-up     { animation: fadeUp 0.5s ease-out; }
+.animate-fade-up-delay-1 { animation: fadeUp 0.5s ease-out 0.1s both; }
+.animate-fade-up-delay-2 { animation: fadeUp 0.5s ease-out 0.2s both; }
+.animate-fade-up-delay-3 { animation: fadeUp 0.5s ease-out 0.3s both; }
+.animate-fade-up-delay-4 { animation: fadeUp 0.5s ease-out 0.4s both; }
+.animate-fade-up-delay-5 { animation: fadeUp 0.5s ease-out 0.5s both; }
+
+/* Chart.js dark overrides */
+canvas { max-width: 100%; }
+
+/* Input / form resets for dark theme */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px #0d1421 inset;
+  -webkit-text-fill-color: #e2e8f0;
+  caret-color: #e2e8f0;
+}
