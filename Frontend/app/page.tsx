@@ -107,18 +107,18 @@ export default function LandingPage() {
           {/* CTA */}
           <motion.div {...fade(0.4)} className="flex flex-wrap gap-3 justify-center">
             <Link
-              href="/interview"
+              href="/login"
               className="inline-flex items-center gap-2 px-7 py-3 bg-gradient-to-r from-blue-700 to-blue-500 text-white rounded-lg font-semibold text-sm tracking-wide hover:shadow-[0_8px_24px_rgba(59,130,246,.4)] hover:-translate-y-0.5 transition-all duration-200"
             >
               <Play className="w-4 h-4" />
-              Start Interview
+              Get Started
             </Link>
             <Link
-              href="/dashboard"
+              href="#features"
               className="inline-flex items-center gap-2 px-7 py-3 bg-transparent text-slate-200 border border-[#243655] rounded-lg font-semibold text-sm tracking-wide hover:border-cyan-500/60 hover:text-cyan-300 hover:bg-cyan-500/5 transition-all duration-200"
             >
               <BarChart className="w-4 h-4" />
-              View Dashboard
+              View Features
             </Link>
           </motion.div>
         </div>
@@ -137,7 +137,7 @@ export default function LandingPage() {
       </div>
 
       {/* ── FEATURES ──────────────────────────────────────── */}
-      <section className="max-w-6xl mx-auto px-6 py-20">
+      <section id="features" className="max-w-6xl mx-auto px-6 py-20">
         <div className="text-[11px] font-semibold tracking-widest uppercase text-cyan-400 mb-2">Core Modules</div>
         <h2 className="text-3xl font-bold tracking-tight mb-2">Six AI-Driven Intelligence Layers</h2>
         <p className="text-slate-400 text-sm mb-12">
@@ -212,10 +212,10 @@ export default function LandingPage() {
       <div className="border-t border-[#1e2d47] py-10 text-center">
         <p className="text-slate-500 text-sm mb-4">Ready to monitor your next interview session?</p>
         <Link
-          href="/interview"
+          href="/login"
           className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-blue-700 to-cyan-500 text-white rounded-lg font-semibold text-sm hover:shadow-[0_8px_28px_rgba(59,130,246,.4)] hover:-translate-y-0.5 transition-all duration-200"
         >
-          Launch Monitoring System
+          Login to Get Started
           <span className="text-lg">→</span>
         </Link>
       </div>

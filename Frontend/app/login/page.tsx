@@ -1,19 +1,43 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { motion } from "framer-motion";
+import { useAuth } from "@/lib/auth";
 
 export default function LoginPage() {
   const router = useRouter();
-  const [role, setRole] = useState<"student" | "admin">("student");
-  const [email, setEmail] = useState("student@college.edu");
+  const { login, isAuthenticated } = useAuth();
+  const [role, setRole]         = useState<"student" | "admin">("student");
+  const [email, setEmail]       = useState("student@college.edu");
   const [password, setPassword] = useState("password123");
+  const [loading, setLoading]   = useState(false);
 
-  const handleLogin = () => {
-    toast.success(`Signed in as ${role === "admin" ? "Admin" : "Student"}`);
+  // If already logged in, redirect immediately
+  useEffect(() => {
+    if (isAuthenticated) router.replace("/dashboard");
+  }, [isAuthenticated, router]);
+
+  const handleLogin = async () => {
+    if (!email || !password) {
+      toast.error("Please fill in all fields.");
+      return;
+    }
+    setLoading(true);
+
+    // ── Simulated auth (replace with real API call) ──────────────────────
+    await new Promise((r) => setTimeout(r, 700));
+
+    const mockToken = `mock-token-${Date.now()}`;
+    const displayName =
+      role === "admin" ? "Admin User" : email.split("@")[0] ?? "Student";
+
+    login({ email, role, name: displayName }, mockToken);
+
+    toast.success(`Signed in as ${role === "admin" ? "Admin" : "Student"} 👋`);
     router.push(role === "admin" ? "/admin" : "/dashboard");
+    // ─────────────────────────────────────────────────────────────────────
   };
 
   return (
@@ -32,7 +56,9 @@ export default function LoginPage() {
         <div className="bg-[#0f1724]/90 backdrop-blur-md border border-[#1e2d47] rounded-2xl p-8">
           {/* Logo */}
           <div className="flex items-center gap-3 mb-7">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-700 to-cyan-500 flex items-center justify-center text-sm font-bold text-white">AI</div>
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-700 to-cyan-500 flex items-center justify-center text-sm font-bold text-white">
+              AI
+            </div>
             <div>
               <div className="text-sm font-bold text-cyan-400">AISMS</div>
               <div className="text-[10px] text-slate-500">Interview Monitoring System</div>
@@ -47,7 +73,10 @@ export default function LoginPage() {
             {(["student", "admin"] as const).map((r) => (
               <button
                 key={r}
-                onClick={() => setRole(r)}
+                onClick={() => {
+                  setRole(r);
+                  setEmail(r === "admin" ? "admin@college.edu" : "student@college.edu");
+                }}
                 className={`py-3 rounded-lg text-sm font-medium border transition-all duration-200 ${
                   role === r
                     ? "border-blue-500 bg-blue-500/10 text-blue-300"
@@ -62,8 +91,11 @@ export default function LoginPage() {
           {/* Fields */}
           <div className="space-y-4 mb-6">
             <div>
-              <label className="block text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-1.5">Email</label>
+              <label className="block text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-1.5">
+                Email
+              </label>
               <input
+                id="login-email"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -71,21 +103,34 @@ export default function LoginPage() {
               />
             </div>
             <div>
-              <label className="block text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-1.5">Password</label>
+              <label className="block text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-1.5">
+                Password
+              </label>
               <input
+                id="login-password"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && handleLogin()}
                 className="w-full px-3 py-2.5 bg-[#0d1421] border border-[#1e2d47] rounded-lg text-sm text-slate-200 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15 transition-all duration-200"
               />
             </div>
           </div>
 
           <button
+            id="login-submit"
             onClick={handleLogin}
-            className="w-full py-2.5 bg-gradient-to-r from-blue-700 to-blue-500 text-white rounded-lg font-semibold text-sm hover:shadow-[0_6px_20px_rgba(59,130,246,.4)] transition-all duration-200 active:scale-[.98]"
+            disabled={loading}
+            className="w-full py-2.5 bg-gradient-to-r from-blue-700 to-blue-500 text-white rounded-lg font-semibold text-sm hover:shadow-[0_6px_20px_rgba(59,130,246,.4)] transition-all duration-200 active:scale-[.98] disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
           >
-            Sign In →
+            {loading ? (
+              <>
+                <span className="w-3.5 h-3.5 rounded-full border-2 border-white/30 border-t-white animate-spin" />
+                Signing in…
+              </>
+            ) : (
+              "Sign In →"
+            )}
           </button>
 
           <div className="flex items-center gap-3 my-5 text-[11px] text-slate-600">
