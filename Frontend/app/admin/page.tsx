@@ -9,6 +9,7 @@ import { ProgressBar } from "@/components/ui/ProgressBar";
 import { Button } from "@/components/ui/Button";
 import { AdminPieChart, AdminBarChart } from "@/components/charts/AdminCharts";
 import { MOCK_CANDIDATES, getRiskColor } from "@/lib/utils";
+import ProtectedRoute from "@/components/layout/ProtectedRoute";
 
 const ALERT_BREAKDOWN = [
   { label: "Eye Deviation",    pct: 42, color: "#06b6d4" },
@@ -25,7 +26,8 @@ export default function AdminPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[#080c14] pt-14">
+    <ProtectedRoute>
+    <div className="min-h-screen bg-[#080c14] pt-16">
       <div className="max-w-7xl mx-auto px-4 md:px-6 py-6">
 
         {/* Header */}
@@ -162,5 +164,6 @@ export default function AdminPage() {
         </div>
       </div>
     </div>
+    </ProtectedRoute>
   );
 }

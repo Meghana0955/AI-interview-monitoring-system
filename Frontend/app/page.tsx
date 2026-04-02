@@ -1,7 +1,8 @@
 "use client";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Eye, User, Mic, AlertTriangle, Brain, Lightbulb, Camera, Zap, Database, Play, BarChart } from "lucide-react";
+import { Eye, User, Mic, AlertTriangle, Brain, Lightbulb, Camera, Zap, Database, Play, BarChart, UserPlus, MonitorPlay, FileCheck, Shield, TrendingUp, Clock } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
 
 const features = [
   {
@@ -63,35 +64,104 @@ const techStack = [
   { label: "AI Models", value: "OpenCV · MediaPipe · TensorFlow" },
 ];
 
-const fade = (delay = 0) => ({
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.5, delay },
-});
+const howItWorks = [
+  {
+    step: "01",
+    icon: <UserPlus className="w-7 h-7" />,
+    title: "Sign Up & Login",
+    desc: "Create your account in seconds and access the monitoring platform with role-based permissions.",
+    color: "#06b6d4",
+  },
+  {
+    step: "02",
+    icon: <MonitorPlay className="w-7 h-7" />,
+    title: "Start AI Session",
+    desc: "Launch a monitored interview session with real-time webcam, audio, and behavioral tracking powered by 6 AI modules.",
+    color: "#3b82f6",
+  },
+  {
+    step: "03",
+    icon: <FileCheck className="w-7 h-7" />,
+    title: "Get AI Feedback",
+    desc: "Receive comprehensive reports with risk analysis, violation breakdowns, and personalized improvement suggestions.",
+    color: "#10b981",
+  },
+];
+
+const whyChoose = [
+  {
+    icon: <Shield className="w-5 h-5" />,
+    title: "Exam Integrity Guaranteed",
+    desc: "Multi-layered AI detection ensures every interview is fair, secure, and tamper-proof.",
+    color: "#06b6d4",
+  },
+  {
+    icon: <TrendingUp className="w-5 h-5" />,
+    title: "Data-Driven Insights",
+    desc: "Transform raw behavioral data into actionable performance metrics with trend analysis.",
+    color: "#3b82f6",
+  },
+  {
+    icon: <Clock className="w-5 h-5" />,
+    title: "Real-Time Processing",
+    desc: "12ms response latency ensures instant detection and alerting with zero delay.",
+    color: "#10b981",
+  },
+];
+
+/* ── Animation variants ──────────────────────────────── */
+const fadeUp = {
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-60px" },
+};
+
+const staggerContainer = {
+  whileInView: { transition: { staggerChildren: 0.08 } },
+  viewport: { once: true },
+};
+
+const staggerItem = {
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+};
 
 export default function LandingPage() {
+  const { isAuthenticated } = useAuth();
+
   return (
     <div className="bg-[#080c14] min-h-screen">
 
       {/* ── HERO ─────────────────────────────────────────── */}
-      <section className="relative min-h-[92vh] flex items-center justify-center text-center px-6 pt-14 overflow-hidden">
+      <section className="relative min-h-[92vh] flex items-center justify-center text-center px-6 pt-16 overflow-hidden">
         {/* Background layers */}
-        <div className="absolute inset-0 bg-grid" />
+        <div className="absolute inset-0 bg-grid opacity-40" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#080c14]" />
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute w-[500px] h-[500px] -top-20 -left-20 bg-blue-500/10 rounded-full blur-[80px] animate-float" />
-          <div className="absolute w-[400px] h-[400px] -bottom-16 -right-12 bg-cyan-500/8  rounded-full blur-[80px] animate-float" style={{ animationDelay: "3s" }} />
-          <div className="absolute w-[300px] h-[300px] top-1/2 left-1/2 -translate-x-1/2 bg-purple-500/6 rounded-full blur-[80px] animate-float" style={{ animationDelay: "5s" }} />
+          <div className="absolute w-[600px] h-[600px] -top-32 -left-32 bg-blue-500/10 rounded-full blur-[100px] animate-float" />
+          <div className="absolute w-[500px] h-[500px] -bottom-20 -right-16 bg-cyan-500/8  rounded-full blur-[100px] animate-float" style={{ animationDelay: "3s" }} />
+          <div className="absolute w-[400px] h-[400px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-purple-500/6 rounded-full blur-[100px] animate-float" style={{ animationDelay: "5s" }} />
         </div>
 
         <div className="relative z-10 max-w-4xl mx-auto">
           {/* Badge */}
-          <motion.div {...fade(0.1)} className="inline-flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/25 rounded-full px-4 py-1.5 text-xs text-cyan-400 font-medium mb-8">
-            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_6px_#06b6d4] animate-pulse-dot" />
+          <motion.div
+            initial={{ opacity: 0, y: 16, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="inline-flex items-center gap-2 glass-card rounded-full px-5 py-2 text-xs text-cyan-400 font-medium mb-8"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_8px_#06b6d4] animate-pulse-dot" />
             Powered by Behavioral AI Engine v2.0
           </motion.div>
 
           {/* Title */}
-          <motion.h1 {...fade(0.2)} className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-5">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-5"
+          >
             <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
               AI-Powered
             </span>{" "}
@@ -100,124 +170,292 @@ export default function LandingPage() {
           </motion.h1>
 
           {/* Tagline */}
-          <motion.p {...fade(0.3)} className="text-lg text-slate-400 mb-10 font-light">
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.35 }}
+            className="text-lg text-slate-400 mb-10 font-light max-w-2xl mx-auto"
+          >
             Ensuring Integrity, Enhancing Performance
           </motion.p>
 
           {/* CTA */}
-          <motion.div {...fade(0.4)} className="flex flex-wrap gap-3 justify-center">
-            <Link
-              href="/interview"
-              className="inline-flex items-center gap-2 px-7 py-3 bg-gradient-to-r from-blue-700 to-blue-500 text-white rounded-lg font-semibold text-sm tracking-wide hover:shadow-[0_8px_24px_rgba(59,130,246,.4)] hover:-translate-y-0.5 transition-all duration-200"
-            >
-              <Play className="w-4 h-4" />
-              Start Interview
-            </Link>
-            <Link
-              href="/dashboard"
-              className="inline-flex items-center gap-2 px-7 py-3 bg-transparent text-slate-200 border border-[#243655] rounded-lg font-semibold text-sm tracking-wide hover:border-cyan-500/60 hover:text-cyan-300 hover:bg-cyan-500/5 transition-all duration-200"
-            >
-              <BarChart className="w-4 h-4" />
-              View Dashboard
-            </Link>
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.45 }}
+            className="flex flex-wrap gap-3 justify-center"
+          >
+            {isAuthenticated ? (
+              <>
+                <Link
+                  href="/interview"
+                  className="inline-flex items-center gap-2 px-8 py-3.5 bg-gradient-to-r from-blue-600 to-cyan-500 text-white rounded-xl font-semibold text-sm tracking-wide shadow-[0_4px_20px_rgba(59,130,246,0.3)] hover:shadow-[0_8px_32px_rgba(59,130,246,0.5)] hover:-translate-y-0.5 transition-all duration-300"
+                >
+                  <Play className="w-4 h-4" />
+                  Start Interview
+                </Link>
+                <Link
+                  href="/dashboard"
+                  className="inline-flex items-center gap-2 px-8 py-3.5 glass-card text-slate-200 rounded-xl font-semibold text-sm tracking-wide hover:border-cyan-500/40 hover:text-cyan-300 transition-all duration-300"
+                >
+                  <BarChart className="w-4 h-4" />
+                  View Dashboard
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/login"
+                  className="inline-flex items-center gap-2 px-8 py-3.5 bg-gradient-to-r from-blue-600 to-cyan-500 text-white rounded-xl font-semibold text-sm tracking-wide shadow-[0_4px_20px_rgba(59,130,246,0.3)] hover:shadow-[0_8px_32px_rgba(59,130,246,0.5)] hover:-translate-y-0.5 transition-all duration-300"
+                >
+                  <Play className="w-4 h-4" />
+                  Get Started
+                </Link>
+                <button
+                  onClick={() => document.getElementById("features")?.scrollIntoView({ behavior: "smooth" })}
+                  className="inline-flex items-center gap-2 px-8 py-3.5 glass-card text-slate-200 rounded-xl font-semibold text-sm tracking-wide hover:border-cyan-500/40 hover:text-cyan-300 transition-all duration-300"
+                >
+                  Explore Features ↓
+                </button>
+              </>
+            )}
           </motion.div>
         </div>
       </section>
 
       {/* ── STATS BANNER ──────────────────────────────────── */}
-      <div className="border-y border-[#1e2d47] bg-[#0f1724]">
-        <div className="max-w-5xl mx-auto px-6 py-6 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-          {stats.map((s, i) => (
-            <motion.div key={i} {...fade(0.1 * i)}>
-              <div className="text-3xl font-bold font-mono tracking-tight" style={{ color: s.color }}>{s.value}</div>
-              <div className="text-xs text-slate-400 mt-1">{s.label}</div>
-            </motion.div>
-          ))}
+      <div className="relative">
+        <div className="section-divider" />
+        <div className="glass" style={{ background: "rgba(15, 23, 36, 0.5)" }}>
+          <div className="max-w-5xl mx-auto px-6 py-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            {stats.map((s, i) => (
+              <motion.div
+                key={i}
+                {...fadeUp}
+                transition={{ duration: 0.4, delay: 0.1 * i }}
+              >
+                <div className="text-3xl sm:text-4xl font-bold font-mono tracking-tight" style={{ color: s.color }}>{s.value}</div>
+                <div className="text-xs text-slate-400 mt-1.5">{s.label}</div>
+              </motion.div>
+            ))}
+          </div>
         </div>
+        <div className="section-divider" />
       </div>
 
       {/* ── FEATURES ──────────────────────────────────────── */}
-      <section className="max-w-6xl mx-auto px-6 py-20">
-        <div className="text-[11px] font-semibold tracking-widest uppercase text-cyan-400 mb-2">Core Modules</div>
-        <h2 className="text-3xl font-bold tracking-tight mb-2">Six AI-Driven Intelligence Layers</h2>
-        <p className="text-slate-400 text-sm mb-12">
-          Multi-modal behavioral analysis combining computer vision, audio processing, and predictive risk modeling.
-        </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <section id="features" className="max-w-6xl mx-auto px-6 py-20 md:py-28">
+        <motion.div {...fadeUp} transition={{ duration: 0.5 }}>
+          <div className="text-[11px] font-semibold tracking-widest uppercase text-cyan-400 mb-2">Core Modules</div>
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-3">Six AI-Driven Intelligence Layers</h2>
+          <p className="text-slate-400 text-sm mb-14 max-w-2xl">
+            Multi-modal behavioral analysis combining computer vision, audio processing, and predictive risk modeling.
+          </p>
+        </motion.div>
+
+        <motion.div
+          {...staggerContainer}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
+        >
           {features.map((f, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.08 }}
-              className="group relative bg-[#0f1724] border border-[#1e2d47] rounded-xl p-6 overflow-hidden hover:border-[#243655] hover:-translate-y-0.5 transition-all duration-250"
+              variants={staggerItem}
+              transition={{ duration: 0.4 }}
+              whileHover={{ y: -4, transition: { duration: 0.2 } }}
+              className="group relative glass-card glass-card-hover rounded-xl p-6 overflow-hidden"
             >
+              {/* Top accent line */}
               <div
-                className="absolute top-0 left-0 right-0 h-0.5 opacity-0 group-hover:opacity-100 transition-opacity duration-250"
+                className="absolute top-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                 style={{ background: `linear-gradient(90deg, transparent, ${f.accent}, transparent)` }}
               />
+              {/* Hover glow */}
               <div
-                className="w-10 h-10 rounded-lg flex items-center justify-center text-xl mb-4"
-                style={{ background: `${f.accent}18` }}
+                className="absolute -top-20 -right-20 w-40 h-40 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-[60px]"
+                style={{ background: f.accent + "15" }}
+              />
+
+              <div
+                className="relative w-11 h-11 rounded-lg flex items-center justify-center mb-4"
+                style={{ background: `${f.accent}15`, color: f.accent }}
               >
                 {f.icon}
               </div>
-              <h3 className="text-[15px] font-semibold mb-2">{f.title}</h3>
-              <p className="text-sm text-slate-400 leading-relaxed">{f.desc}</p>
+              <h3 className="relative text-[15px] font-semibold mb-2">{f.title}</h3>
+              <p className="relative text-sm text-slate-400 leading-relaxed">{f.desc}</p>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </section>
 
-      {/* ── ARCHITECTURE ─────────────────────────────────── */}
-      <section className="max-w-6xl mx-auto px-6 pb-20">
-        <div className="text-[11px] font-semibold tracking-widest uppercase text-cyan-400 mb-2">System Architecture</div>
-        <h2 className="text-3xl font-bold tracking-tight mb-2">Processing Pipeline</h2>
-        <p className="text-slate-400 text-sm mb-8">
-          From raw sensor inputs to intelligent behavioral reports — all in real time.
-        </p>
-        <div className="bg-[#0f1724] border border-[#1e2d47] rounded-2xl p-8">
+      {/* ── PROCESSING PIPELINE ───────────────────────────── */}
+      <section id="pipeline" className="max-w-6xl mx-auto px-6 pb-20 md:pb-28">
+        <motion.div {...fadeUp} transition={{ duration: 0.5 }}>
+          <div className="text-[11px] font-semibold tracking-widest uppercase text-cyan-400 mb-2">System Architecture</div>
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-3">Processing Pipeline</h2>
+          <p className="text-slate-400 text-sm mb-10 max-w-2xl">
+            From raw sensor inputs to intelligent behavioral reports — all in real time.
+          </p>
+        </motion.div>
+
+        <motion.div
+          {...fadeUp}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="glass-card rounded-2xl p-6 sm:p-8"
+        >
           {/* Flow */}
-          <div className="flex flex-wrap items-center justify-center gap-2 mb-8">
+          <div className="flex flex-wrap items-center justify-center gap-3 mb-8">
             {archSteps.map((s, i) => (
-              <div key={i} className="flex items-center gap-2">
+              <motion.div
+                key={i}
+                className="flex items-center gap-3"
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: i * 0.1 }}
+              >
                 <div
-                  className="bg-[#131e2e] border rounded-lg px-4 py-3 text-center min-w-[110px]"
-                  style={{ borderColor: `${s.color}40` }}
+                  className="glass-card rounded-xl px-5 py-4 text-center min-w-[120px] hover:border-opacity-60 transition-all duration-300"
+                  style={{ borderColor: `${s.color}30` }}
                 >
-                  <div className="text-base mb-0.5">{s.icon}</div>
+                  <div className="flex justify-center mb-1" style={{ color: s.color }}>{s.icon}</div>
                   <div className="text-xs font-semibold" style={{ color: s.color }}>{s.label}</div>
                   <div className="text-[10px] text-slate-500 mt-0.5">{s.sub}</div>
                 </div>
                 {i < archSteps.length - 1 && (
-                  <span className="text-slate-600 text-lg font-light">→</span>
+                  <span className="text-slate-600 text-lg font-light hidden sm:inline">→</span>
                 )}
-              </div>
+              </motion.div>
             ))}
           </div>
+
           {/* Tech stack */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {techStack.map((t, i) => (
-              <div key={i} className="bg-[#080c14] border border-[#1e2d47] rounded-lg px-4 py-3">
+              <div key={i} className="bg-[#080c14]/60 border border-white/[0.06] rounded-lg px-4 py-3">
                 <div className="text-[10px] text-slate-500 font-semibold uppercase tracking-wider mb-1">{t.label}</div>
                 <div className="text-[13px] font-medium text-slate-200">{t.value}</div>
               </div>
             ))}
           </div>
+        </motion.div>
+      </section>
+
+      {/* ── HOW IT WORKS ──────────────────────────────────── */}
+      <section className="relative py-20 md:py-28">
+        <div className="section-divider" />
+        <div className="glass" style={{ background: "rgba(15, 23, 36, 0.3)" }}>
+          <div className="max-w-5xl mx-auto px-6 py-20">
+            <motion.div {...fadeUp} transition={{ duration: 0.5 }} className="text-center mb-14">
+              <div className="text-[11px] font-semibold tracking-widest uppercase text-cyan-400 mb-2">Getting Started</div>
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-3">How It Works</h2>
+              <p className="text-slate-400 text-sm max-w-lg mx-auto">
+                Get up and running in three simple steps — from sign-up to AI-powered feedback.
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {howItWorks.map((item, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: i * 0.12 }}
+                  className="relative glass-card glass-card-hover rounded-xl p-6 text-center"
+                >
+                  {/* Step number */}
+                  <div className="text-[11px] font-bold font-mono tracking-widest mb-4" style={{ color: item.color }}>
+                    STEP {item.step}
+                  </div>
+                  {/* Icon */}
+                  <div
+                    className="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4"
+                    style={{ background: `${item.color}12`, color: item.color }}
+                  >
+                    {item.icon}
+                  </div>
+                  <h3 className="text-base font-semibold mb-2">{item.title}</h3>
+                  <p className="text-sm text-slate-400 leading-relaxed">{item.desc}</p>
+
+                  {/* Connector arrow (between cards on desktop) */}
+                  {i < howItWorks.length - 1 && (
+                    <div className="hidden md:block absolute -right-3 top-1/2 -translate-y-1/2 text-slate-600 text-lg z-10">→</div>
+                  )}
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div className="section-divider" />
+      </section>
+
+      {/* ── ABOUT / WHY CHOOSE US ─────────────────────────── */}
+      <section id="about" className="max-w-6xl mx-auto px-6 py-20 md:py-28">
+        <motion.div {...fadeUp} transition={{ duration: 0.5 }} className="text-center mb-14">
+          <div className="text-[11px] font-semibold tracking-widest uppercase text-cyan-400 mb-2">Why AISMS</div>
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-3">Built for Integrity at Scale</h2>
+          <p className="text-slate-400 text-sm max-w-lg mx-auto">
+            A purpose-built monitoring platform that combines cutting-edge AI with seamless user experience.
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {whyChoose.map((item, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: i * 0.1 }}
+              whileHover={{ y: -3, transition: { duration: 0.2 } }}
+              className="glass-card glass-card-hover rounded-xl p-6"
+            >
+              <div
+                className="w-10 h-10 rounded-lg flex items-center justify-center mb-4"
+                style={{ background: `${item.color}12`, color: item.color }}
+              >
+                {item.icon}
+              </div>
+              <h3 className="text-[15px] font-semibold mb-2">{item.title}</h3>
+              <p className="text-sm text-slate-400 leading-relaxed">{item.desc}</p>
+            </motion.div>
+          ))}
         </div>
       </section>
 
       {/* ── FOOTER CTA ───────────────────────────────────── */}
-      <div className="border-t border-[#1e2d47] py-10 text-center">
-        <p className="text-slate-500 text-sm mb-4">Ready to monitor your next interview session?</p>
-        <Link
-          href="/interview"
-          className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-blue-700 to-cyan-500 text-white rounded-lg font-semibold text-sm hover:shadow-[0_8px_28px_rgba(59,130,246,.4)] hover:-translate-y-0.5 transition-all duration-200"
-        >
-          Launch Monitoring System
-          <span className="text-lg">→</span>
-        </Link>
+      <div className="relative">
+        <div className="section-divider" />
+        <div className="relative py-16 text-center overflow-hidden">
+          {/* Background glow */}
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute w-[500px] h-[300px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-blue-500/8 rounded-full blur-[80px]" />
+          </div>
+
+          <motion.div {...fadeUp} transition={{ duration: 0.5 }} className="relative z-10">
+            <p className="text-slate-400 text-base mb-6 font-light">Ready to monitor your next interview session?</p>
+            <Link
+              href={isAuthenticated ? "/interview" : "/login"}
+              className="inline-flex items-center gap-2 px-10 py-4 bg-gradient-to-r from-blue-600 to-cyan-500 text-white rounded-xl font-semibold text-sm shadow-[0_4px_24px_rgba(59,130,246,0.3)] hover:shadow-[0_8px_36px_rgba(59,130,246,0.5)] hover:-translate-y-0.5 transition-all duration-300"
+            >
+              {isAuthenticated ? "Launch Monitoring System" : "Get Started Free"}
+              <span className="text-lg">→</span>
+            </Link>
+          </motion.div>
+        </div>
+
+        {/* Footer branding */}
+        <div className="section-divider" />
+        <div className="py-8 text-center">
+          <div className="flex items-center justify-center gap-2 mb-2">
+            <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-blue-600 to-cyan-400 flex items-center justify-center text-[9px] font-bold text-white">AI</div>
+            <span className="text-xs font-bold text-slate-500">AISMS</span>
+          </div>
+          <p className="text-[11px] text-slate-600">AI-Powered Interview Monitoring & Behavioral Analysis System</p>
+        </div>
       </div>
     </div>
   );
