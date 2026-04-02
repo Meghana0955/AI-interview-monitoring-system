@@ -55,51 +55,46 @@ def get_face_status(frame):
         return "Multiple Faces"
 
 
-# ---------------- EXISTING CODE (UNCHANGED) ---------------- #
+# ---------------- STANDALONE TEST (only runs directly) ---------------- #
 
-cap = cv2.VideoCapture(0)
+if __name__ == "__main__":
+    cap = cv2.VideoCapture(0)
 
-while True:
-    ret, frame = cap.read()
-    if not ret:
-        break
+    while True:
+        ret, frame = cap.read()
+        if not ret:
+            break
 
-    rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-    mp_image = mp.Image(image_format=mp.ImageFormat.SRGB, data=rgb)
+        rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        mp_image = mp.Image(image_format=mp.ImageFormat.SRGB, data=rgb)
 
-    result = landmarker.detect(mp_image)
+        result = landmarker.detect(mp_image)
 
-    face_count = len(result.face_landmarks) if result.face_landmarks else 0
+        face_count = len(result.face_landmarks) if result.face_landmarks else 0
 
-    suspicious = False
+        suspicious = False
 
-    # Determine status
-    if face_count == 0:
-        status = "Face Missing"
-        color = (0, 0, 255)
-        suspicious = True
+        if face_count == 0:
+            status = "Face Missing"
+            color = (0, 0, 255)
+            suspicious = True
+        elif face_count == 1:
+            status = "Normal"
+            color = (0, 255, 0)
+        else:
+            status = "WARNING: Multiple Faces Detected"
+            color = (0, 0, 255)
+            suspicious = True
 
-    elif face_count == 1:
-        status = "Normal"
-        color = (0, 255, 0)
+        cv2.putText(frame, f"Faces: {face_count}", (30, 40),
+                    cv2.FONT_HERSHEY_SIMPLEX, 1, color, 2)
+        cv2.putText(frame, status, (30, 80),
+                    cv2.FONT_HERSHEY_SIMPLEX, 1, color, 2)
 
-    else:
-        status = "WARNING: Multiple Faces Detected"
-        color = (0, 0, 255)
-        suspicious = True
+        cv2.imshow("Face Detection", frame)
 
-    # Draw face count
-    cv2.putText(frame, f"Faces: {face_count}", (30, 40),
-                cv2.FONT_HERSHEY_SIMPLEX, 1, color, 2)
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
 
-    # Draw status
-    cv2.putText(frame, status, (30, 80),
-                cv2.FONT_HERSHEY_SIMPLEX, 1, color, 2)
-
-    cv2.imshow("Face Detection", frame)
-
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
-
-cap.release()
-cv2.destroyAllWindows()
+    cap.release()
+    cv2.destroyAllWindows()

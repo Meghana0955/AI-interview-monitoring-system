@@ -67,30 +67,31 @@ def get_eye_status(frame):
     return "normal"
 
 
-# ---------------- EXISTING CODE (UNCHANGED) ---------------- #
+# ---------------- STANDALONE TEST (only runs directly) ---------------- #
 
-cap = cv2.VideoCapture(0)
+if __name__ == "__main__":
+    cap = cv2.VideoCapture(0)
 
-while True:
-    ret, frame = cap.read()
-    if not ret:
-        break
+    while True:
+        ret, frame = cap.read()
+        if not ret:
+            break
 
-    eye_status = get_eye_status(frame)
+        eye_status = get_eye_status(frame)
 
-    # Display (for testing)
-    if eye_status == "normal":
-        display_text = "Normal"
-    else:
-        display_text = f"Suspicious: {eye_status}"
+        # Display (for testing)
+        if eye_status == "normal":
+            display_text = "Normal"
+        else:
+            display_text = f"Suspicious: {eye_status}"
 
-    cv2.putText(frame, display_text, (30, 40),
-                cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
+        cv2.putText(frame, display_text, (30, 40),
+                    cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
 
-    cv2.imshow("Gaze Detection", frame)
+        cv2.imshow("Gaze Detection", frame)
 
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
 
-cap.release()
-cv2.destroyAllWindows()
+    cap.release()
+    cv2.destroyAllWindows()
