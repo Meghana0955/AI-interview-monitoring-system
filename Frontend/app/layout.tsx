@@ -23,7 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${dmSans.variable} dark`}>
       <body className="bg-[#080c14] text-slate-200 font-sans antialiased">
         <AuthProvider>
-          <Navbar />
+   
           <main>{children}</main>
           <Toaster
             position="bottom-right"
