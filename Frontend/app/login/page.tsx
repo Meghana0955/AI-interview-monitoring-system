@@ -40,58 +40,72 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#080c14] flex items-center justify-center px-4 py-8">
-      {/* Back to home */}
-      <Link
-        href="/"
-        className="fixed top-5 left-5 z-50 flex items-center gap-2 px-3.5 py-2 rounded-lg text-sm font-medium text-slate-400 glass-card hover:text-cyan-300 hover:border-cyan-500/30 transition-all duration-200"
-      >
-        <ArrowLeft className="w-4 h-4" />
-        Home
-      </Link>
-
+    <div className="relative min-h-screen overflow-hidden bg-[#08080f] px-4 py-8 text-white sm:px-6">
       <div className="absolute inset-0 bg-grid opacity-30" />
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute w-[500px] h-[500px] top-1/4 left-1/2 -translate-x-1/2 bg-blue-500/6 rounded-full blur-[100px]" />
-      </div>
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_65%_45%_at_50%_-12%,rgba(124,58,237,0.2),transparent)]" />
 
       <motion.div
-        initial={{ opacity: 0, y: 24 }}
+        initial={{ opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.45 }}
-        className="relative z-10 w-full max-w-sm"
+        transition={{ duration: 0.4 }}
+        className="relative z-10 mx-auto grid w-full max-w-6xl overflow-hidden rounded-[28px] border border-white/10 bg-[#2a2638] shadow-[0_30px_90px_rgba(0,0,0,0.45)] lg:grid-cols-[1.05fr_1fr]"
       >
-        <div className="glass-card rounded-2xl p-8">
-          {/* Logo */}
-          <div className="flex items-center gap-3 mb-7">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-600 to-cyan-400 flex items-center justify-center text-sm font-bold text-white shadow-[0_0_20px_rgba(6,182,212,0.2)]">AI</div>
-            <div>
-              <div className="text-sm font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">AISMS</div>
-              <div className="text-[10px] text-slate-500">Interview Monitoring System</div>
-            </div>
+        <div className="relative hidden min-h-[680px] border-r border-white/10 bg-gradient-to-b from-[#6f5ad5] via-[#4b3b8f] to-[#1a1630] p-7 lg:block">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_20%_0%,rgba(255,255,255,0.15),transparent)]" />
+          <div className="relative z-10 flex items-center justify-between">
+            <span className="text-3xl font-semibold tracking-[0.18em] text-white/90">AISMS</span>
+            <Link
+              href="/"
+              className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/15 px-4 py-1.5 text-sm text-white/90 backdrop-blur-xl transition hover:bg-white/25"
+            >
+              Back to website
+              <ArrowLeft className="h-3.5 w-3.5 rotate-180" />
+            </Link>
           </div>
 
-          <h2 className="text-xl font-bold mb-1 tracking-tight">Welcome Back</h2>
-          <p className="text-sm text-slate-400 mb-6">Sign in to your monitoring account</p>
+          <div className="pointer-events-none absolute bottom-16 left-8 right-8">
+            <div className="mb-4 max-w-xs text-5xl font-light leading-[1.05] text-white/90">Monitor Better</div>
+            <p className="mb-8 max-w-xs text-sm leading-6 text-white/70">Real-time interview integrity, behavioral intelligence, and performance insights.</p>
+            <div className="flex items-center gap-3">
+              <span className="h-1.5 w-8 rounded-full bg-white/25" />
+              <span className="h-1.5 w-8 rounded-full bg-white/25" />
+              <span className="h-1.5 w-8 rounded-full bg-white" />
+            </div>
+          </div>
+        </div>
 
-          {/* Fields */}
-          <div className="space-y-4 mb-6">
+        <div className="relative bg-[#2a2638] p-7 sm:p-10 lg:min-h-[680px] lg:p-14">
+          <Link
+            href="/"
+            className="mb-7 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-slate-300 backdrop-blur-2xl transition-all duration-200 hover:border-white/20 hover:bg-white/[0.08] hover:text-white lg:hidden"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back to website
+          </Link>
+
+          <h1 className="mb-2 text-4xl font-semibold tracking-[-0.03em] text-white">Welcome back</h1>
+          <p className="mb-10 text-base text-slate-300/90">Don&apos;t have an account? <Link href="/signup" className="text-[#c4b5fd] underline underline-offset-2 hover:text-white">Sign up</Link></p>
+
+          <div className="space-y-5">
             <div>
-              <label className="block text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-1.5">Email</label>
+              <label className="mb-2 block text-sm text-slate-300">Email</label>
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-3.5 py-2.5 bg-[#0d1421]/80 border border-white/[0.06] rounded-lg text-sm text-slate-200 outline-none focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/15 focus:bg-[#0d1421] transition-all duration-200"
+                className="w-full rounded-xl border border-white/10 bg-white/8 px-4 py-3 text-sm text-white placeholder:text-slate-300/50 outline-none transition focus:border-[#b9a7ff] focus:ring-2 focus:ring-[#8b5cf6]/25"
+                placeholder="you@example.com"
               />
             </div>
+
             <div>
-              <label className="block text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-1.5">Password</label>
+              <label className="mb-2 block text-sm text-slate-300">Password</label>
               <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-3.5 py-2.5 bg-[#0d1421]/80 border border-white/[0.06] rounded-lg text-sm text-slate-200 outline-none focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/15 focus:bg-[#0d1421] transition-all duration-200"
+                className="w-full rounded-xl border border-white/10 bg-white/8 px-4 py-3 text-sm text-white placeholder:text-slate-300/50 outline-none transition focus:border-[#b9a7ff] focus:ring-2 focus:ring-[#8b5cf6]/25"
+                placeholder="Enter your password"
               />
             </div>
           </div>
@@ -99,28 +113,17 @@ export default function LoginPage() {
           <button
             onClick={handleLogin}
             disabled={isLoading}
-            className="w-full py-3 bg-gradient-to-r from-blue-600 to-cyan-500 text-white rounded-lg font-semibold text-sm shadow-[0_4px_20px_rgba(59,130,246,0.25)] hover:shadow-[0_6px_28px_rgba(59,130,246,0.4)] transition-all duration-300 active:scale-[.98] disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            className="mt-8 flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#8b5cf6] via-[#7c3aed] to-[#3b82f6] py-3 text-sm font-semibold text-white shadow-[0_10px_28px_rgba(124,58,237,0.45)] transition-all duration-300 hover:shadow-[0_14px_36px_rgba(124,58,237,0.55)] active:scale-[.98] disabled:cursor-not-allowed disabled:opacity-60"
           >
             {isLoading ? (
               <>
-                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                <div className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
                 Signing in...
               </>
             ) : (
-              "Sign In →"
+              "Sign In"
             )}
           </button>
-
-          <div className="flex items-center gap-3 my-5 text-[11px] text-slate-600">
-            <div className="flex-1 h-px bg-white/[0.06]" />or<div className="flex-1 h-px bg-white/[0.06]" />
-          </div>
-
-          <p className="text-center text-sm text-slate-400">
-            No account?{" "}
-            <Link href="/signup" className="text-blue-400 hover:text-blue-300 underline transition-colors">
-              Create one
-            </Link>
-          </p>
         </div>
       </motion.div>
     </div>
