@@ -10,14 +10,14 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variants: Record<ButtonVariant, string> = {
-  primary: "bg-gradient-to-r from-blue-700 to-blue-500 text-white hover:shadow-[0_8px_24px_rgba(59,130,246,.35)] hover:-translate-y-px",
-  outline: "bg-transparent text-slate-200 border border-[#243655] hover:border-blue-500/60 hover:text-blue-300 hover:bg-blue-500/5",
-  ghost:   "bg-transparent text-slate-400 hover:text-slate-200 hover:bg-white/5",
-  danger:  "bg-red-500/15 text-red-400 border border-red-500/30 hover:bg-red-500/25",
+  primary: "bg-[#7c3aed] text-white hover:bg-[#6d28d9] shadow-[0_4px_24px_rgba(124,58,237,0.4)] hover:shadow-[0_6px_32px_rgba(124,58,237,0.55)] hover:-translate-y-0.5",
+  outline: "bg-transparent text-white/60 border border-white/[0.07] hover:border-[#7c3aed]/40 hover:text-[#a78bfa] hover:bg-[#7c3aed]/5",
+  ghost:   "bg-transparent text-white/40 hover:text-white hover:bg-white/5",
+  danger:  "bg-red-500/10 text-red-400 border border-red-500/20 hover:bg-red-500/20 hover:border-red-500/40",
 };
 
 const sizes: Record<ButtonSize, string> = {
-  sm: "px-3 py-1.5 text-xs",
+  sm: "px-3.5 py-1.5 text-xs",
   md: "px-5 py-2.5 text-sm",
   lg: "px-7 py-3 text-sm",
 };
@@ -32,7 +32,7 @@ export function Button({
   return (
     <button
       className={cn(
-        "inline-flex items-center justify-center gap-2 rounded-lg font-semibold tracking-wide transition-all duration-200 active:scale-[.97] disabled:opacity-50 disabled:cursor-not-allowed",
+        "inline-flex items-center justify-center gap-2 rounded-xl font-semibold tracking-wide transition-all duration-200 active:scale-[.97] disabled:opacity-50 disabled:cursor-not-allowed",
         variants[variant],
         sizes[size],
         className

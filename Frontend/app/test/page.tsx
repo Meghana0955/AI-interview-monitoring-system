@@ -9,7 +9,10 @@ import { Alert } from "@/components/ui/Alert";
 import { Button } from "@/components/ui/Button";
 import { WebcamFeed } from "@/components/monitoring/WebcamFeed";
 import { ProgressBar } from "@/components/ui/ProgressBar";
+import { PageHeader } from "@/components/ui/PageHeader";
 import { formatTime, INTERVIEW_QUESTIONS, FEEDBACK_MESSAGES } from "@/lib/utils";
+import ProtectedRoute from "@/components/layout/ProtectedRoute";
+import { Play, Square, ArrowRight, Clock } from "lucide-react";
 
 const TOTAL_SECS = 15 * 60;
 
@@ -22,7 +25,6 @@ export default function TestPage() {
   const [riskPreview, setRisk]    = useState(0);
   const fbIdx = useRef(0);
 
-  // Countdown
   useEffect(() => {
     if (!running) return;
     const id = setInterval(() => {
@@ -34,7 +36,6 @@ export default function TestPage() {
     return () => clearInterval(id);
   }, [running]);
 
-  // Feedback stream
   useEffect(() => {
     if (!running) return;
     const id = setInterval(() => {
@@ -56,7 +57,7 @@ export default function TestPage() {
 
   const endTest = () => {
     setRunning(false);
-    toast.success("Test complete! Generating feedback…");
+    toast.success("Test complete! Generating feedback...");
     setTimeout(() => router.push("/feedback"), 1200);
   };
 
@@ -65,19 +66,19 @@ export default function TestPage() {
   const secs = remaining % 60;
 
   return (
-    <div className="min-h-screen bg-[#080c14] pt-14">
+    <ProtectedRoute>
+    <div className="min-h-screen bg-[#08080f] pt-24">
       <div className="max-w-7xl mx-auto px-4 md:px-6 py-6">
 
-        {/* Header */}
-        <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
-          <motion.div initial={{ opacity:0,y:12 }} animate={{ opacity:1,y:0 }}>
-            <h2 className="text-xl font-bold tracking-tight">Mock Interview Practice</h2>
-            <div className="text-xs text-slate-500 mt-1">Simulate a real session before your actual interview</div>
-          </motion.div>
-          <Badge variant={running ? "red" : "green"}>
-            {running ? "● Running" : "Ready"}
-          </Badge>
-        </div>
+        <PageHeader
+          title="Mock Interview Practice"
+          subtitle="Simulate a real session before your actual interview"
+          badge={
+            <Badge variant={running ? "red" : "green"}>
+              {running ? <><span className="w-1.5 h-1.5 rounded-full bg-red-400 animate-pulse" /> Running</> : "Ready"}
+            </Badge>
+          }
+        />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           {/* Left */}
@@ -85,26 +86,30 @@ export default function TestPage() {
             {/* Timer */}
             <motion.div initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:0.1 }}>
               <Card className="text-center">
-                <CardHeader title="Session Timer" />
+                <CardHeader title="Session Timer" right={<Clock className="w-4 h-4 text-white/20" />} />
                 <div
                   className="text-7xl font-bold font-mono tracking-tighter py-4"
-                  style={{ color: remaining < 60 ? "#ef4444" : "#06b6d4" }}
+                  style={{ color: remaining < 60 ? "#ef4444" : "#7c3aed" }}
                 >
                   {String(mins).padStart(2,"0")}:{String(secs).padStart(2,"0")}
                 </div>
-                <ProgressBar value={progress} color={running ? "#06b6d4" : "#1e2d47"} className="mb-5" />
+                <ProgressBar value={progress} color={running ? "#7c3aed" : "rgba(255,255,255,0.06)"} className="mb-5" />
                 <div className="flex gap-3 justify-center flex-wrap">
                   {!running ? (
-                    <Button onClick={startTest}>▶ Start Test</Button>
+                    <Button onClick={startTest}>
+                      <Play className="w-4 h-4" /> Start Test
+                    </Button>
                   ) : (
                     <>
                       <Button
                         variant="outline"
                         onClick={() => setCurrentQ(q => Math.min(q + 1, INTERVIEW_QUESTIONS.length - 1))}
                       >
-                        → Next Question
+                        <ArrowRight className="w-4 h-4" /> Next Question
                       </Button>
-                      <Button variant="danger" onClick={endTest}>⏹ End Test</Button>
+                      <Button variant="danger" onClick={endTest}>
+                        <Square className="w-4 h-4" /> End Test
+                      </Button>
                     </>
                   )}
                 </div>
@@ -114,10 +119,13 @@ export default function TestPage() {
             {/* AI Feedback stream */}
             <motion.div initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:0.2 }}>
               <Card>
-                <CardHeader title="Simulated AI Feedback" right={running ? <span className="text-[10px] text-emerald-400 font-mono animate-pulse-dot">● LIVE</span> : undefined} />
+                <CardHeader
+                  title="Simulated AI Feedback"
+                  right={running ? <span className="text-[10px] text-emerald-400 font-mono animate-pulse-dot flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-emerald-400" /> LIVE</span> : undefined}
+                />
                 {feedbacks.length === 0 ? (
-                  <div className="text-center py-8 text-sm text-slate-500">
-                    {running ? "Analyzing…" : "Start the test to see real-time AI feedback"}
+                  <div className="text-center py-8 text-sm text-white/25">
+                    {running ? "Analyzing..." : "Start the test to see real-time AI feedback"}
                   </div>
                 ) : (
                   <div className="space-y-2">
@@ -159,26 +167,26 @@ export default function TestPage() {
               <Card>
                 <CardHeader
                   title="Interview Questions"
-                  right={<span className="text-xs text-slate-500">{currentQ + 1} / {INTERVIEW_QUESTIONS.length}</span>}
+                  right={<span className="text-xs text-white/25">{currentQ + 1} / {INTERVIEW_QUESTIONS.length}</span>}
                 />
                 <div className="space-y-3">
                   {INTERVIEW_QUESTIONS.map((q, i) => (
                     <div
                       key={q.id}
-                      className={`p-4 rounded-lg border transition-all duration-200 cursor-pointer ${
+                      className={`p-4 rounded-xl border transition-all duration-200 cursor-pointer ${
                         i === currentQ
-                          ? "border-blue-500/40 bg-blue-500/8"
+                          ? "border-[#7c3aed]/30 bg-[#7c3aed]/[0.06]"
                           : i < currentQ
-                          ? "border-emerald-500/20 bg-emerald-500/4 opacity-60"
-                          : "border-[#1e2d47] bg-[#131e2e] opacity-40"
+                          ? "border-emerald-500/15 bg-emerald-500/[0.03] opacity-60"
+                          : "border-white/[0.04] bg-white/[0.01] opacity-40"
                       }`}
                       onClick={() => setCurrentQ(i)}
                     >
-                      <div className="text-[10px] text-slate-500 font-medium uppercase tracking-wide mb-1">
+                      <div className="text-[10px] text-white/25 font-medium uppercase tracking-wide mb-1">
                         Question {q.id} of {INTERVIEW_QUESTIONS.length}
-                        {i < currentQ && " ✓"}
+                        {i < currentQ && " · Done"}
                       </div>
-                      <div className="text-sm leading-relaxed text-slate-200">{q.q}</div>
+                      <div className="text-sm leading-relaxed text-white/60">{q.q}</div>
                     </div>
                   ))}
                 </div>
@@ -196,5 +204,6 @@ export default function TestPage() {
         </div>
       </div>
     </div>
+    </ProtectedRoute>
   );
 }

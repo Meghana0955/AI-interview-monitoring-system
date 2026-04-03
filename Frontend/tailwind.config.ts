@@ -10,22 +10,29 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["var(--font-space)", "sans-serif"],
+        sans: ["var(--font-sans)", "sans-serif"],
         mono: ["var(--font-mono)", "monospace"],
       },
       colors: {
         bg: {
-          DEFAULT: "#080c14",
-          secondary: "#0d1421",
-          tertiary: "#111827",
+          DEFAULT: "#08080f",
+          secondary: "#0e0e1a",
+          tertiary: "#0d0d14",
         },
         card: {
-          DEFAULT: "#0f1724",
-          secondary: "#131e2e",
+          DEFAULT: "#0e0e1a",
+          secondary: "#12121f",
         },
         border: {
-          DEFAULT: "#1e2d47",
-          secondary: "#243655",
+          DEFAULT: "rgba(255, 255, 255, 0.07)",
+          secondary: "rgba(255, 255, 255, 0.12)",
+          hover: "rgba(124, 58, 237, 0.3)",
+        },
+        primary: {
+          DEFAULT: "#7c3aed",
+          hover: "#6d28d9",
+          light: "#a78bfa",
+          dark: "#4c1d95",
         },
         neon: {
           cyan: "#06b6d4",
@@ -72,7 +79,7 @@ const config: Config = {
       },
       backgroundImage: {
         "grid-pattern":
-          "linear-gradient(rgba(30,45,71,.35) 1px, transparent 1px), linear-gradient(90deg, rgba(30,45,71,.35) 1px, transparent 1px)",
+          "linear-gradient(rgba(124,58,237,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(124,58,237,.08) 1px, transparent 1px)",
       },
       backgroundSize: {
         grid: "40px 40px",

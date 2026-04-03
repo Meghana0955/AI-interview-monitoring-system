@@ -113,7 +113,7 @@ def voice_monitoring_loop():
     global noise_level
     import sounddevice as sd
 
-    print("🎤 Voice monitoring thread started")
+    print("Voice monitoring thread started")
 
     while state["running"]:
         try:
@@ -122,23 +122,24 @@ def voice_monitoring_loop():
             audio = sd.rec(int(duration * 44100), samplerate=44100, channels=1)
             sd.wait()
 
-            volume = float(np.linalg.norm(audio))
+            # Use RMS (root mean square) — comparable to calibration regardless of duration
+            rms = float(np.sqrt(np.mean(audio ** 2)))
 
             with voice_lock:
-                if noise_level and volume > noise_level * 1.2:
+                if noise_level and rms > noise_level * 1.5:
                     state["voice_status"] = "Background voice detected"
                     state["noise_detected"] = True
-                    state["audio_level"] = round(volume, 2)
+                    state["audio_level"] = round(rms, 4)
                 else:
                     state["voice_status"] = "Normal"
                     state["noise_detected"] = False
-                    state["audio_level"] = round(volume, 2)
+                    state["audio_level"] = round(rms, 4)
 
         except Exception as e:
-            print(f"⚠ Voice detection error: {e}")
+            print(f"Voice detection error: {e}")
             time.sleep(0.5)
 
-    print("🎤 Voice monitoring thread stopped")
+    print("Voice monitoring thread stopped")
 
 
 def decode_frame(base64_data: str) -> np.ndarray:
@@ -212,7 +213,7 @@ def start_session():
     if VOICE_AVAILABLE:
         try:
             noise_level = calibrate_noise(duration=1)
-            print(f"🎤 Voice calibrated. Noise level: {noise_level:.4f}")
+            print(f"Voice calibrated. Noise RMS: {noise_level:.6f}, Threshold: {noise_level * 1.5:.6f}")
             voice_ok = True
             voice_thread = threading.Thread(target=voice_monitoring_loop, daemon=True)
             voice_thread.start()

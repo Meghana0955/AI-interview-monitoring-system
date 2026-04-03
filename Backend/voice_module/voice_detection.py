@@ -11,31 +11,29 @@ def calibrate_noise(duration=2):
                    channels=1)
     sd.wait()
 
-    noise_level = np.linalg.norm(audio)
+    # Use RMS (root mean square) so the value is independent of recording length
+    rms = float(np.sqrt(np.mean(audio ** 2)))
 
-    print(f"Noise Level: {noise_level:.5f}")
-    return noise_level
+    print(f"Noise Level (RMS): {rms:.5f}")
+    return rms
 
 
 # -------- DETECTION -------- #
 
-def detect_voice(noise_level, duration=0.5, factor=1.2):
+def detect_voice(noise_level, duration=0.5, factor=1.5):
 
     audio = sd.rec(int(duration * 44100),
                    samplerate=44100,
                    channels=1)
     sd.wait()
 
-    volume = np.linalg.norm(audio)
+    # Use RMS so it's comparable to the calibration value
+    rms = float(np.sqrt(np.mean(audio ** 2)))
 
-    print(f"[DEBUG] Volume: {volume:.5f}")
-
-    if volume > noise_level * factor:
-        return "Background voice detected"
+    if rms > noise_level * factor:
+        return "Background voice detected", rms
     else:
-        return "Normal"
-    
-    print(f"[VOICE CHECK] Threshold: {noise_level * factor}")
+        return "Normal", rms
 
 # -------- MAIN -------- #
 
@@ -47,8 +45,8 @@ if __name__ == "__main__":
 
     try:
         while True:
-            status = detect_voice(noise_level)
-            print("Voice Status:", status)
+            status, vol = detect_voice(noise_level)
+            print(f"Voice Status: {status} (RMS: {vol:.5f}, Threshold: {noise_level * 1.5:.5f})")
 
     except KeyboardInterrupt:
         print("\nStopped")
