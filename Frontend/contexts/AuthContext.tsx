@@ -11,6 +11,7 @@ interface AuthContextType {
   login: (email: string, password: string) => Promise<UserProfile>;
   register: (data: RegisterData) => Promise<UserProfile>;
   loginWithToken: (user: UserProfile, token: string) => void;
+  updateUser: (updatedUser: UserProfile) => void;
   logout: () => void;
 }
 
@@ -26,6 +27,7 @@ const AuthContext = createContext<AuthContextType>({
     throw new Error("Auth provider not mounted");
   },
   loginWithToken: () => {},
+  updateUser: () => {},
   logout: () => {},
 });
 
@@ -99,9 +101,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     router.push("/");
   };
 
+  const updateUser = (updatedUser: UserProfile) => {
+    setUser(updatedUser);
+    localStorage.setItem("aisms_user", JSON.stringify(updatedUser));
+  };
+
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated: !!user, user, token, loading, login, register, loginWithToken, logout }}
+      value={{ isAuthenticated: !!user, user, token, loading, login, register, loginWithToken, updateUser, logout }}
     >
       {children}
     </AuthContext.Provider>

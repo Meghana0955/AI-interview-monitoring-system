@@ -2,7 +2,7 @@
 import { cn } from "@/lib/utils";
 
 interface ProgressBarProps {
-  value: number; // 0–100
+  value: number;
   color?: string;
   height?: string;
   className?: string;
@@ -12,7 +12,7 @@ interface ProgressBarProps {
 
 export function ProgressBar({
   value,
-  color = "#06b6d4",
+  color = "#3b82f6",
   height = "h-1.5",
   className,
   showLabel,
@@ -22,15 +22,15 @@ export function ProgressBar({
   return (
     <div className={className}>
       {(showLabel || label) && (
-        <div className="flex justify-between text-[11px] text-slate-400 mb-1.5">
+        <div className="flex justify-between text-[11px] text-white/35 mb-1.5">
           <span>{label ?? "Progress"}</span>
-          <span>{Math.round(clamped)}%</span>
+          <span className="font-mono">{Math.round(clamped)}%</span>
         </div>
       )}
-      <div className={cn("w-full bg-[#1e2d47] rounded-full overflow-hidden", height)}>
+      <div className={cn("w-full bg-white/[0.06] rounded-full overflow-hidden", height)}>
         <div
           className="h-full rounded-full transition-all duration-700 ease-out"
-          style={{ width: `${clamped}%`, background: color }}
+          style={{ width: `${clamped}%`, background: color, boxShadow: `0 0 8px ${color}30` }}
         />
       </div>
     </div>

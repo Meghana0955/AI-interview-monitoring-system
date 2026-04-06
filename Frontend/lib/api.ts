@@ -248,6 +248,7 @@ export interface UserProfile {
   branch: string;
   course: string;
   year: string;
+  semester?: string;
   role: "student" | "admin";
 }
 
@@ -287,7 +288,23 @@ export interface SessionDetailResponse {
 
 export interface RegisterData {
   name: string; email: string; password: string;
-  college: string; branch: string; course: string; year: string;
+  college: string; branch: string; course: string; year: string; semester?: string;
+}
+
+// ── Update Profile API ─────────────────────────────────────────
+
+export async function updateProfile(data: Partial<UserProfile>): Promise<UserProfile | null> {
+  try {
+    const res = await fetch(`${BASE}/api/auth/profile`, {
+      method: "PUT",
+      headers: authHeaders() as HeadersInit,
+      body: JSON.stringify(data),
+      signal: AbortSignal.timeout(8000),
+    });
+    if (!res.ok) return null;
+    const json = await res.json();
+    return json.user;
+  } catch { return null; }
 }
 
 // ── Token helpers ──────────────────────────────────────────────

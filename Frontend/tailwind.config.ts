@@ -10,48 +10,57 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["var(--font-space)", "sans-serif"],
+        sans: ["var(--font-sans)", "sans-serif"],
         mono: ["var(--font-mono)", "monospace"],
       },
       colors: {
+        /* ── Background depth levels ── */
         bg: {
-          DEFAULT: "#080c14",
-          secondary: "#0d1421",
-          tertiary: "#111827",
+          DEFAULT:   "#080c14",  // deepest page
+          secondary: "#0a101a",  // page sections
+          tertiary:  "#0d1524",  // sidebar / panels
         },
         card: {
-          DEFAULT: "#0f1724",
-          secondary: "#131e2e",
+          DEFAULT:   "#101828",  // card primary
+          secondary: "#131e2e",  // card secondary
         },
+        /* ── Borders ── */
         border: {
-          DEFAULT: "#1e2d47",
-          secondary: "#243655",
+          DEFAULT: "#1e2d47",  // default — never brighter
+          hover:   "#243655",  // on hover
         },
+        /* ── Neon accent roles ── */
         neon: {
-          cyan: "#06b6d4",
-          blue: "#3b82f6",
-          purple: "#8b5cf6",
-          green: "#10b981",
-          amber: "#f59e0b",
-          red: "#ef4444",
+          cyan:   "#06b6d4",  // eye tracking, live, hero
+          blue:   "#3b82f6",  // face detection, buttons, active nav
+          purple: "#8b5cf6",  // voice / audio module
+          amber:  "#f59e0b",  // risk scores, medium warnings
+          green:  "#10b981",  // low risk, success, verified
+          red:    "#ef4444",  // high risk, critical alerts, REC
+        },
+        /* ── Text levels ── */
+        text: {
+          primary:   "#e2e8f0",
+          secondary: "#94a3b8",
+          muted:     "#64748b",
         },
       },
       animation: {
-        "pulse-slow": "pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite",
-        float: "float 8s ease-in-out infinite",
-        "scan-ring": "scanRing 2s ease-out infinite",
-        "audio-bar": "audioBar 1.2s ease-in-out infinite alternate",
-        "fade-in": "fadeIn 0.5s ease-out",
-        "slide-up": "slideUp 0.4s ease-out",
+        "pulse-slow":     "pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+        float:            "float 8s ease-in-out infinite",
+        "scan-ring":      "scanRing 2s ease-out infinite",
+        "audio-bar":      "audioBar 1.2s ease-in-out infinite alternate",
+        "fade-in":        "fadeIn 0.5s ease-out",
+        "slide-up":       "slideUp 0.4s ease-out",
         "slide-in-right": "slideInRight 0.3s ease-out",
       },
       keyframes: {
         float: {
           "0%, 100%": { transform: "translateY(0px)" },
-          "50%": { transform: "translateY(-20px)" },
+          "50%":      { transform: "translateY(-20px)" },
         },
         scanRing: {
-          "0%": { width: "40px", height: "40px", opacity: "0.8" },
+          "0%":   { width: "40px",  height: "40px",  opacity: "0.8" },
           "100%": { width: "120px", height: "120px", opacity: "0" },
         },
         audioBar: {
@@ -59,20 +68,20 @@ const config: Config = {
         },
         fadeIn: {
           from: { opacity: "0" },
-          to: { opacity: "1" },
+          to:   { opacity: "1" },
         },
         slideUp: {
           from: { opacity: "0", transform: "translateY(16px)" },
-          to: { opacity: "1", transform: "translateY(0)" },
+          to:   { opacity: "1", transform: "translateY(0)" },
         },
         slideInRight: {
           from: { opacity: "0", transform: "translateX(100%)" },
-          to: { opacity: "1", transform: "translateX(0)" },
+          to:   { opacity: "1", transform: "translateX(0)" },
         },
       },
       backgroundImage: {
         "grid-pattern":
-          "linear-gradient(rgba(30,45,71,.35) 1px, transparent 1px), linear-gradient(90deg, rgba(30,45,71,.35) 1px, transparent 1px)",
+          "linear-gradient(rgba(30,45,71,.5) 1px, transparent 1px), linear-gradient(90deg, rgba(30,45,71,.5) 1px, transparent 1px)",
       },
       backgroundSize: {
         grid: "40px 40px",
