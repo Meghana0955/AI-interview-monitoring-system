@@ -6,22 +6,29 @@
   --font-sans: "DM Sans", sans-serif;
   --font-mono: var(--font-sans);
 
-  /* ── Purple Design System Tokens ── */
-  --color-primary: #7c3aed;
-  --color-primary-hover: #6d28d9;
-  --color-primary-light: #a78bfa;
-  --color-primary-dark: #4c1d95;
-  --color-bg: #08080f;
-  --color-bg-secondary: #0e0e1a;
-  --color-bg-tertiary: #0d0d14;
-  --color-card: #0e0e1a;
-  --color-card-secondary: #12121f;
-  --color-border: rgba(255, 255, 255, 0.07);
-  --color-border-hover: rgba(124, 58, 237, 0.3);
-  --color-text: #ffffff;
-  --color-text-secondary: rgba(255, 255, 255, 0.5);
-  --color-text-muted: rgba(255, 255, 255, 0.35);
-  --color-text-faint: rgba(255, 255, 255, 0.2);
+  /* ── Background depth levels (5 levels) ── */
+  --color-bg:            #080c14; /* deepest page */
+  --color-bg-secondary:  #0a101a; /* page sections */
+  --color-bg-tertiary:   #0d1524; /* sidebar / panels */
+  --color-card:          #101828; /* card primary */
+  --color-card-secondary:#131e2e; /* card secondary */
+
+  /* ── Neon accent roles ── */
+  --color-cyan:   #06b6d4; /* eye tracking, live, hero */
+  --color-blue:   #3b82f6; /* face detection, buttons, active nav */
+  --color-purple: #8b5cf6; /* voice / audio module */
+  --color-amber:  #f59e0b; /* risk scores, medium warnings */
+  --color-green:  #10b981; /* low risk, success, verified */
+  --color-red:    #ef4444; /* high risk, critical alerts, REC */
+
+  /* ── Borders (two values only) ── */
+  --color-border:       #1e2d47; /* default */
+  --color-border-hover: #243655; /* hover — never brighter */
+
+  /* ── Text levels ── */
+  --color-text:         #e2e8f0; /* primary */
+  --color-text-secondary: #94a3b8; /* secondary */
+  --color-text-muted:   #64748b; /* muted / label */
 }
 
 * {
@@ -36,63 +43,143 @@ html {
 }
 
 body {
-  background: var(--color-bg);
+  background:
+    radial-gradient(circle at top, rgba(6, 182, 212, 0.07), transparent 32%),
+    radial-gradient(circle at 85% 10%, rgba(59, 130, 246, 0.06), transparent 24%),
+    radial-gradient(circle at 15% 20%, rgba(139, 92, 246, 0.05), transparent 26%),
+    linear-gradient(180deg, #080c14 0%, #080c14 60%, #06090f 100%);
   color: var(--color-text);
   font-family: var(--font-sans);
   min-height: 100vh;
   overflow-x: hidden;
+  background-attachment: fixed;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(30, 45, 71, 0.4) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(30, 45, 71, 0.4) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: linear-gradient(180deg, rgba(0,0,0,0.9), rgba(0,0,0,0.35) 80%, transparent);
+  opacity: 0.22;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 0%, rgba(6, 182, 212, 0.07), transparent 40%);
+  mix-blend-mode: screen;
+  opacity: 0.6;
+}
+
+::selection {
+  background: rgba(59, 130, 246, 0.3);
+  color: #e2e8f0;
 }
 
 /* ── Custom Scrollbar ────────────────────────────── */
 ::-webkit-scrollbar { width: 4px; height: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(124, 58, 237, 0.3); border-radius: 2px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(124, 58, 237, 0.5); }
+::-webkit-scrollbar-thumb { background: rgba(59, 130, 246, 0.25); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(6, 182, 212, 0.45); }
 
 /* ── Grid background utility ────────────────────── */
 .bg-grid {
-  background-image: linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+  background-image: linear-gradient(rgba(30,45,71,.5) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(30,45,71,.5) 1px, transparent 1px);
   background-size: 40px 40px;
 }
 
 /* ── Glassmorphism utilities ────────────────────── */
 .glass {
-  background: rgba(255,255,255,0.03);
+  background: rgba(16, 24, 40, 0.5);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--color-border);
 }
 
 .glass-card {
-  background: rgba(14, 14, 26, 0.85);
+  background: rgba(16, 24, 40, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--color-border);
   box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.28),
-    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    0 8px 32px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(226, 232, 240, 0.03);
 }
 
 .glass-card-hover {
   transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .glass-card-hover:hover {
-  background: rgba(14, 14, 26, 0.95);
+  background: rgba(19, 30, 46, 0.95);
   border-color: var(--color-border-hover);
   box-shadow:
-    0 18px 52px rgba(0, 0, 0, 0.34),
-    0 0 20px rgba(124, 58, 237, 0.06),
-    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    0 18px 52px rgba(0, 0, 0, 0.42),
+    0 0 20px rgba(59, 130, 246, 0.06),
+    inset 0 1px 0 rgba(226, 232, 240, 0.05);
   transform: translateY(-2px);
 }
 
+.theme-panel {
+  background: rgba(16, 24, 40, 0.82);
+  border: 1px solid var(--color-border);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  box-shadow:
+    0 14px 42px rgba(0, 0, 0, 0.32),
+    inset 0 1px 0 rgba(226, 232, 240, 0.03);
+}
+
+.theme-panel-hover {
+  transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.theme-panel-hover:hover {
+  border-color: var(--color-border-hover);
+  box-shadow:
+    0 22px 60px rgba(0, 0, 0, 0.4),
+    0 0 28px rgba(59, 130, 246, 0.07),
+    inset 0 1px 0 rgba(226, 232, 240, 0.05);
+  transform: translateY(-2px);
+}
+
+.theme-glow {
+  position: relative;
+  overflow: hidden;
+}
+
+.theme-glow::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top right, rgba(59, 130, 246, 0.1), transparent 55%);
+  opacity: 0;
+  transition: opacity 300ms ease;
+  pointer-events: none;
+}
+
+.theme-glow:hover::after {
+  opacity: 1;
+}
+
 /* ── Neon glow utilities ────────────────────────── */
-.glow-purple { box-shadow: 0 0 24px rgba(124, 58, 237, 0.15); }
-.glow-cyan   { box-shadow: 0 0 24px rgba(6, 182, 212, 0.15); }
-.glow-blue   { box-shadow: 0 0 24px rgba(59, 130, 246, 0.15); }
-.glow-red    { box-shadow: 0 0 24px rgba(239, 68, 68, 0.15); }
-.glow-green  { box-shadow: 0 0 24px rgba(16, 185, 129, 0.15); }
+.glow-cyan   { box-shadow: 0 0 24px rgba(6, 182, 212, 0.2); }
+.glow-blue   { box-shadow: 0 0 24px rgba(59, 130, 246, 0.2); }
+.glow-purple { box-shadow: 0 0 24px rgba(139, 92, 246, 0.2); }
+.glow-amber  { box-shadow: 0 0 24px rgba(245, 158, 11, 0.2); }
+.glow-green  { box-shadow: 0 0 24px rgba(16, 185, 129, 0.2); }
+.glow-red    { box-shadow: 0 0 24px rgba(239, 68, 68, 0.2); }
 
 /* ── Keyframe animations ────────────────────────── */
 @keyframes float {
@@ -159,7 +246,7 @@ body {
 /* ── Section divider ────────────────────────────── */
 .section-divider {
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(124, 58, 237, 0.15), transparent);
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.18), transparent);
 }
 
 /* ── Chart.js dark overrides ────────────────────── */
@@ -169,19 +256,23 @@ canvas { max-width: 100%; }
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus {
-  -webkit-box-shadow: 0 0 0px 1000px #08080f inset;
-  -webkit-text-fill-color: #ffffff;
-  caret-color: #ffffff;
+  -webkit-box-shadow: 0 0 0px 1000px #080c14 inset;
+  -webkit-text-fill-color: #e2e8f0;
+  caret-color: #e2e8f0;
 }
 
 /* ── Recharts tooltip override ──────────────────── */
 .recharts-default-tooltip {
-  background: #0e0e1a !important;
-  border: 1px solid rgba(255, 255, 255, 0.07) !important;
+  background: #101828 !important;
+  border: 1px solid #1e2d47 !important;
   border-radius: 12px !important;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5) !important;
 }
 .recharts-tooltip-label {
-  color: rgba(255, 255, 255, 0.5) !important;
+  color: #94a3b8 !important;
   font-size: 11px !important;
+}
+
+.recharts-cartesian-axis-tick-value {
+  fill: #64748b !important;
 }

@@ -19,16 +19,16 @@ const YEARS   = ["1st Year", "2nd Year", "3rd Year", "4th Year", "PG 1st Year", 
 const SEMESTERS = ["1", "2", "3", "4", "5", "6", "7", "8"];
 
 const inputCls =
-  "w-full rounded-xl border border-white/[0.07] bg-[#0d0d14] px-4 py-2.5 text-sm text-white placeholder:text-white/20 outline-none transition-all duration-200 focus:border-[#7c3aed]/60 focus:bg-[#0f0f1a] focus:ring-2 focus:ring-[#7c3aed]/15 hover:border-white/10";
+  "w-full rounded-xl border border-[#1e2d47] bg-[#0d1524] px-4 py-2.5 text-sm text-white placeholder:text-[#64748b] outline-none transition-all duration-200 focus:border-[#3b82f6]/60 focus:bg-[#101828] focus:ring-2 focus:ring-[#3b82f6]/15 hover:border-white/10";
 
 function InfoRow({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) {
   return (
     <div className="flex items-center gap-3 py-3 border-b border-white/[0.04] last:border-0">
-      <div className="w-8 h-8 rounded-lg bg-[#7c3aed]/10 border border-[#7c3aed]/20 flex items-center justify-center text-[#a78bfa]">
+      <div className="w-8 h-8 rounded-lg bg-[#3b82f6]/10 border border-[#3b82f6]/20 flex items-center justify-center text-[#06b6d4]">
         {icon}
       </div>
       <div className="flex-1 min-w-0">
-        <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/25">{label}</div>
+        <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#64748b]">{label}</div>
         <div className="text-sm text-white/70 truncate">{value || "Not provided"}</div>
       </div>
     </div>
@@ -92,7 +92,7 @@ export default function ProfilePage() {
 
   return (
     <ProtectedRoute>
-    <div className="min-h-screen bg-[#08080f] pt-24">
+    <div className="min-h-screen bg-[#080c14] pt-24">
       <div className="max-w-3xl mx-auto px-4 md:px-6 py-6">
 
         <PageHeader
@@ -128,7 +128,7 @@ export default function ProfilePage() {
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
             <Card>
               <div className="flex items-center gap-4 mb-6">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#7c3aed] to-[#4c1d95] flex items-center justify-center text-xl font-bold text-white shadow-[0_0_24px_rgba(124,58,237,0.3)]">
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#3b82f6] to-[#06b6d4] flex items-center justify-center text-xl font-bold text-white shadow-[0_0_24px_rgba(59,130,246,0.3)]">
                   {initials}
                 </div>
                 <div className="flex-1 min-w-0">
@@ -144,7 +144,7 @@ export default function ProfilePage() {
                     <>
                       <h2 className="text-lg font-bold text-white truncate">{user?.name}</h2>
                       <div className="flex items-center gap-2 mt-1">
-                        <span className="text-sm text-white/35">{user?.email}</span>
+                        <span className="text-sm text-[#64748b]">{user?.email}</span>
                         <Badge variant="purple" className="text-[8px]">
                           <Shield className="w-2.5 h-2.5" />
                           {user?.role === "admin" ? "Admin" : "Student"}
@@ -167,14 +167,14 @@ export default function ProfilePage() {
               ) : (
                 <div className="space-y-4">
                   <div>
-                    <label className="mb-1.5 block text-[11px] font-semibold uppercase tracking-[0.18em] text-white/35">
+                    <label className="mb-1.5 block text-[11px] font-semibold uppercase tracking-[0.18em] text-[#64748b]">
                       College / University
                     </label>
                     <input type="text" value={form.college} onChange={set("college")}
                       placeholder="Anna University" className={inputCls} />
                   </div>
                   <div>
-                    <label className="mb-1.5 block text-[11px] font-semibold uppercase tracking-[0.18em] text-white/35">
+                    <label className="mb-1.5 block text-[11px] font-semibold uppercase tracking-[0.18em] text-[#64748b]">
                       Branch / Department
                     </label>
                     <input type="text" value={form.branch} onChange={set("branch")}
@@ -182,30 +182,30 @@ export default function ProfilePage() {
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div>
-                      <label className="mb-1.5 block text-[11px] font-semibold uppercase tracking-[0.18em] text-white/35">
+                      <label className="mb-1.5 block text-[11px] font-semibold uppercase tracking-[0.18em] text-[#64748b]">
                         Course
                       </label>
                       <select value={form.course} onChange={set("course")}
                         className={inputCls + " cursor-pointer appearance-none"}>
-                        {COURSES.map(c => <option key={c} value={c} className="bg-[#0d0d14]">{c}</option>)}
+                        {COURSES.map(c => <option key={c} value={c} className="bg-[#0d1524]">{c}</option>)}
                       </select>
                     </div>
                     <div>
-                      <label className="mb-1.5 block text-[11px] font-semibold uppercase tracking-[0.18em] text-white/35">
+                      <label className="mb-1.5 block text-[11px] font-semibold uppercase tracking-[0.18em] text-[#64748b]">
                         Year
                       </label>
                       <select value={form.year} onChange={set("year")}
                         className={inputCls + " cursor-pointer appearance-none"}>
-                        {YEARS.map(y => <option key={y} value={y} className="bg-[#0d0d14]">{y}</option>)}
+                        {YEARS.map(y => <option key={y} value={y} className="bg-[#0d1524]">{y}</option>)}
                       </select>
                     </div>
                     <div>
-                      <label className="mb-1.5 block text-[11px] font-semibold uppercase tracking-[0.18em] text-white/35">
+                      <label className="mb-1.5 block text-[11px] font-semibold uppercase tracking-[0.18em] text-[#64748b]">
                         Semester
                       </label>
                       <select value={form.semester} onChange={set("semester")}
                         className={inputCls + " cursor-pointer appearance-none"}>
-                        {SEMESTERS.map(s => <option key={s} value={s} className="bg-[#0d0d14]">Semester {s}</option>)}
+                        {SEMESTERS.map(s => <option key={s} value={s} className="bg-[#0d1524]">Semester {s}</option>)}
                       </select>
                     </div>
                   </div>
@@ -226,19 +226,19 @@ export default function ProfilePage() {
                     </div>
                     <div>
                       <div className="text-sm font-medium text-white/70">Account Status</div>
-                      <div className="text-[11px] text-white/25">Your account is active and verified</div>
+                      <div className="text-[11px] text-[#64748b]">Your account is active and verified</div>
                     </div>
                   </div>
                   <Badge variant="green">Active</Badge>
                 </div>
                 <div className="flex items-center justify-between p-3 rounded-xl bg-white/[0.02] border border-white/[0.04]">
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-[#7c3aed]/10 border border-[#7c3aed]/20 flex items-center justify-center text-[#a78bfa]">
+                    <div className="w-8 h-8 rounded-lg bg-[#3b82f6]/10 border border-[#3b82f6]/20 flex items-center justify-center text-[#06b6d4]">
                       <User className="w-3.5 h-3.5" />
                     </div>
                     <div>
                       <div className="text-sm font-medium text-white/70">Role</div>
-                      <div className="text-[11px] text-white/25">
+                      <div className="text-[11px] text-[#64748b]">
                         {user?.role === "admin" ? "Administrator with full access" : "Student with monitoring access"}
                       </div>
                     </div>

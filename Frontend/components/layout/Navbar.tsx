@@ -27,7 +27,6 @@ const publicLinks = [
 const authLinks = [
   { label: "Dashboard", href: "/dashboard", icon: <LayoutDashboard className="w-4 h-4" /> },
   { label: "Sessions",  href: "/interview",  icon: <MonitorPlay className="w-4 h-4" /> },
-  { label: "Practice",  href: "/test",        icon: <GraduationCap className="w-4 h-4" /> },
   { label: "Reports",   href: "/feedback",    icon: <BarChart3 className="w-4 h-4" /> },
 ];
 
@@ -79,7 +78,7 @@ export default function Navbar() {
   // Don't render until auth state is resolved
   if (loading) {
     return (
-      <nav className="fixed left-1/2 top-4 z-50 flex h-14 w-[calc(100%-1.5rem)] max-w-5xl -translate-x-1/2 items-center rounded-2xl border border-white/[0.07] bg-white/5 px-4 backdrop-blur-2xl shadow-[0_20px_60px_rgba(0,0,0,0.35)] md:px-6" />
+      <nav className="fixed left-1/2 top-4 z-50 flex h-14 w-[calc(100%-1.5rem)] max-w-5xl -translate-x-1/2 items-center rounded-2xl border border-[#1e2d47] bg-[rgba(16,24,40,0.82)] px-4 backdrop-blur-2xl shadow-[0_20px_60px_rgba(0,0,0,0.35)] md:px-6" />
     );
   }
 
@@ -93,16 +92,16 @@ export default function Navbar() {
         className={cn(
           "fixed left-1/2 top-4 z-50 flex h-14 w-[calc(100%-1.5rem)] max-w-5xl -translate-x-1/2 items-center justify-between rounded-2xl px-4 transition-all duration-300 md:px-6",
           scrolled
-            ? "border border-white/[0.1] bg-[#08080f]/90 backdrop-blur-2xl shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
-            : "border border-white/[0.07] bg-white/[0.03] backdrop-blur-2xl shadow-[0_16px_48px_rgba(0,0,0,0.28)]"
+            ? "border border-[#243655] bg-[rgba(8,12,20,0.92)] backdrop-blur-2xl shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
+            : "border border-[#1e2d47] bg-[rgba(16,24,40,0.72)] backdrop-blur-2xl shadow-[0_16px_48px_rgba(0,0,0,0.28)]"
         )}
       >
         {/* ── Logo ──────────────────────────────── */}
         <Link href="/" className="flex items-center gap-2.5 flex-shrink-0 group">
-          <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#7c3aed] to-[#4c1d95] flex items-center justify-center text-[10px] font-bold text-white shadow-[0_0_14px_rgba(124,58,237,0.4)] group-hover:shadow-[0_0_22px_rgba(124,58,237,0.6)] transition-shadow duration-300">
+          <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#06b6d4] to-[#3b82f6] flex items-center justify-center text-[10px] font-bold text-white shadow-[0_0_14px_rgba(6,182,212,0.35)] group-hover:shadow-[0_0_22px_rgba(6,182,212,0.55)] transition-shadow duration-300">
             AI
           </div>
-          <span className="text-sm font-bold tracking-widest hidden sm:block text-white/50">
+          <span className="hidden text-sm font-bold tracking-widest text-white/60 sm:block">
             AISMS
           </span>
         </Link>
@@ -117,7 +116,7 @@ export default function Navbar() {
               <button
                 key={item.label}
                 onClick={() => handleNavClick(item as { href: string; scroll?: boolean })}
-                className="relative px-3 py-2 rounded-lg text-[13px] font-medium text-white/40 hover:text-white/70 transition-colors duration-200"
+                className="relative rounded-lg px-3 py-2 text-[13px] font-medium text-white/40 transition-colors duration-200 hover:text-white/75"
               >
                 {item.label}
               </button>
@@ -128,16 +127,16 @@ export default function Navbar() {
                 className={cn(
                   "relative px-3 py-2 rounded-lg text-[13px] font-medium transition-all duration-200 flex items-center gap-1.5",
                   isActive
-                    ? "text-[#a78bfa]"
-                    : "text-white/40 hover:text-white/70"
+                    ? "text-[#06b6d4]"
+                    : "text-[#94a3b8] hover:text-[#e2e8f0]"
                 )}
               >
-                {"icon" in item && <span className={isActive ? "text-[#7c3aed]" : ""}>{item.icon}</span>}
+                {"icon" in item && <span className={isActive ? "text-[#3b82f6]" : ""}>{item.icon}</span>}
                 {item.label}
                 {isActive && (
                   <motion.div
                     layoutId="nav-indicator"
-                    className="absolute bottom-0 left-3 right-3 h-[2px] bg-gradient-to-r from-[#7c3aed] to-[#a78bfa] rounded-full"
+                    className="absolute bottom-0 left-3 right-3 h-[2px] bg-gradient-to-r from-[#3b82f6] to-[#06b6d4] rounded-full"
                     transition={{ type: "spring", stiffness: 350, damping: 30 }}
                   />
                 )}
@@ -153,9 +152,9 @@ export default function Navbar() {
               {/* Profile button */}
               <button
                 onClick={() => setProfileOpen(!profileOpen)}
-                className="hidden md:flex items-center gap-2 rounded-xl border border-white/[0.07] px-3 py-1.5 text-[13px] font-medium text-white/50 transition-all duration-200 hover:border-[#7c3aed]/30 hover:bg-[#7c3aed]/5 hover:text-white/80"
+                className="hidden items-center gap-2 rounded-xl border border-[#1e2d47] px-3 py-1.5 text-[13px] font-medium text-[#94a3b8] transition-all duration-300 hover:border-[#243655] hover:bg-[#3b82f6]/5 hover:text-[#e2e8f0] md:flex"
               >
-                <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-[#7c3aed] to-[#4c1d95] flex items-center justify-center text-[9px] font-bold text-white">
+                <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-[#3b82f6] to-[#06b6d4] flex items-center justify-center text-[9px] font-bold text-white">
                   {initials}
                 </div>
                 <span className="max-w-[100px] truncate">{user?.name?.split(" ")[0]}</span>
@@ -170,12 +169,12 @@ export default function Navbar() {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 8, scale: 0.95 }}
                     transition={{ duration: 0.15 }}
-                    className="absolute right-0 top-full mt-2 w-56 rounded-2xl border border-white/[0.07] bg-[#0e0e1a] p-2 shadow-[0_20px_60px_rgba(0,0,0,0.5)] backdrop-blur-2xl"
+                    className="absolute right-0 top-full mt-2 w-56 rounded-2xl border border-[#1e2d47] bg-[#101828]/95 p-2 shadow-[0_20px_60px_rgba(0,0,0,0.6)] backdrop-blur-2xl"
                   >
                     {/* User info */}
                     <div className="px-3 py-2.5 mb-1">
-                      <div className="text-sm font-semibold text-white truncate">{user?.name}</div>
-                      <div className="text-[11px] text-white/30 truncate">{user?.email}</div>
+                      <div className="text-sm font-semibold text-[#e2e8f0] truncate">{user?.name}</div>
+                      <div className="text-[11px] text-[#64748b] truncate">{user?.email}</div>
                     </div>
                     <div className="h-px bg-white/[0.06] mb-1" />
 
@@ -214,7 +213,7 @@ export default function Navbar() {
           ) : (
             <Link
               href="/login"
-              className="hidden md:inline-flex items-center gap-1.5 rounded-xl bg-[#7c3aed] px-5 py-2 text-[13px] font-semibold text-white shadow-[0_4px_20px_rgba(124,58,237,0.35)] transition-all duration-200 hover:-translate-y-[1px] hover:bg-[#6d28d9] hover:shadow-[0_4px_28px_rgba(124,58,237,0.5)]"
+              className="hidden md:inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-[#3b82f6] via-[#06b6d4] to-[#3b82f6] px-5 py-2 text-[13px] font-semibold text-white shadow-[0_4px_20px_rgba(59,130,246,0.35)] transition-all duration-300 hover:-translate-y-[1px] hover:shadow-[0_4px_28px_rgba(6,182,212,0.5)]"
             >
               Get Started
               <ChevronRight className="w-3.5 h-3.5" />
@@ -224,7 +223,7 @@ export default function Navbar() {
           {/* Mobile hamburger */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="rounded-xl p-2 text-white/40 transition-colors hover:bg-white/5 hover:text-white/70 md:hidden"
+            className="rounded-xl p-2 text-white/40 transition-colors hover:bg-white/[0.05] hover:text-white/75 md:hidden"
             aria-label="Toggle menu"
           >
             {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -248,19 +247,19 @@ export default function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="absolute right-0 top-0 bottom-0 w-72 border-l border-white/[0.07] bg-[#08080f]/95 p-6 pt-20 backdrop-blur-2xl"
+              className="absolute right-0 top-0 bottom-0 w-72 border-l border-[#1e2d47] bg-[#080c14]/95 p-6 pt-20 backdrop-blur-2xl"
               onClick={(e) => e.stopPropagation()}
             >
               {/* User info in mobile */}
               {isAuthenticated && user && (
-                <div className="mb-4 pb-4 border-b border-white/[0.06]">
+                <div className="mb-4 pb-4 border-b border-[#1e2d47]">
                   <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#7c3aed] to-[#4c1d95] flex items-center justify-center text-xs font-bold text-white">
+                    <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#3b82f6] to-[#06b6d4] flex items-center justify-center text-xs font-bold text-white">
                       {initials}
                     </div>
                     <div>
-                      <div className="text-sm font-semibold text-white">{user.name}</div>
-                      <div className="text-[11px] text-white/30 truncate max-w-[160px]">{user.email}</div>
+                      <div className="text-sm font-semibold text-[#e2e8f0]">{user.name}</div>
+                      <div className="text-[11px] text-[#64748b] truncate max-w-[160px]">{user.email}</div>
                     </div>
                   </div>
                 </div>
@@ -275,7 +274,7 @@ export default function Navbar() {
                     <button
                       key={item.label}
                       onClick={() => handleNavClick(item as { href: string; scroll?: boolean })}
-                      className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-white/40 hover:text-white/70 hover:bg-white/5 transition-all duration-200 text-left"
+                      className="flex items-center gap-3 rounded-xl px-4 py-3 text-left text-sm font-medium text-white/40 transition-all duration-200 hover:bg-white/[0.05] hover:text-white/75"
                     >
                       {item.label}
                     </button>
@@ -286,8 +285,8 @@ export default function Navbar() {
                       className={cn(
                         "flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200",
                         isActive
-                          ? "text-[#a78bfa] bg-[#7c3aed]/10 border border-[#7c3aed]/20"
-                          : "text-white/40 hover:text-white/70 hover:bg-white/5"
+                          ? "text-[#06b6d4] bg-[#3b82f6]/10 border border-[#3b82f6]/25"
+                          : "text-[#94a3b8] hover:text-[#e2e8f0] hover:bg-white/[0.04]"
                       )}
                     >
                       {"icon" in item && item.icon}
@@ -297,12 +296,12 @@ export default function Navbar() {
                 })}
 
                 {/* Mobile profile / logout */}
-                <div className="mt-4 pt-4 border-t border-white/[0.06]">
+                <div className="mt-4 pt-4 border-t border-[#1e2d47]">
                   {isAuthenticated ? (
                     <>
                       <Link
                         href="/profile"
-                        className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-white/40 hover:text-white/70 hover:bg-white/5 transition-all duration-200"
+                        className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-white/40 transition-all duration-200 hover:bg-white/[0.05] hover:text-white/75"
                       >
                         <User className="w-4 h-4" />
                         Profile
@@ -312,7 +311,7 @@ export default function Navbar() {
                           setMobileOpen(false);
                           logout();
                         }}
-                        className="flex items-center gap-3 w-full px-4 py-3 rounded-xl text-sm font-medium text-red-400/70 hover:text-red-400 hover:bg-red-500/[0.06] transition-all duration-200"
+                          className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-red-400/70 transition-all duration-200 hover:bg-red-500/[0.06] hover:text-red-400"
                       >
                         <LogOut className="w-4 h-4" />
                         Logout
@@ -321,7 +320,7 @@ export default function Navbar() {
                   ) : (
                     <Link
                       href="/login"
-                      className="flex items-center justify-center gap-2 w-full px-4 py-3 rounded-xl text-sm font-semibold bg-[#7c3aed] text-white shadow-[0_4px_20px_rgba(124,58,237,0.3)] transition-all duration-200"
+                      className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#3b82f6] via-[#06b6d4] to-[#3b82f6] px-4 py-3 text-sm font-semibold text-white shadow-[0_4px_20px_rgba(59,130,246,0.3)] transition-all duration-300"
                     >
                       Get Started
                       <ChevronRight className="w-4 h-4" />

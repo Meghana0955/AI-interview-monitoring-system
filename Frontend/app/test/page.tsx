@@ -67,7 +67,7 @@ export default function TestPage() {
 
   return (
     <ProtectedRoute>
-    <div className="min-h-screen bg-[#08080f] pt-24">
+    <div className="min-h-screen bg-[#080c14] pt-24">
       <div className="max-w-7xl mx-auto px-4 md:px-6 py-6">
 
         <PageHeader
@@ -86,14 +86,14 @@ export default function TestPage() {
             {/* Timer */}
             <motion.div initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:0.1 }}>
               <Card className="text-center">
-                <CardHeader title="Session Timer" right={<Clock className="w-4 h-4 text-white/20" />} />
+                <CardHeader title="Session Timer" right={<Clock className="w-4 h-4 text-[#64748b]" />} />
                 <div
                   className="text-7xl font-bold font-mono tracking-tighter py-4"
-                  style={{ color: remaining < 60 ? "#ef4444" : "#7c3aed" }}
+                  style={{ color: remaining < 60 ? "#ef4444" : "#3b82f6" }}
                 >
                   {String(mins).padStart(2,"0")}:{String(secs).padStart(2,"0")}
                 </div>
-                <ProgressBar value={progress} color={running ? "#7c3aed" : "rgba(255,255,255,0.06)"} className="mb-5" />
+                <ProgressBar value={progress} color={running ? "#3b82f6" : "rgba(255,255,255,0.06)"} className="mb-5" />
                 <div className="flex gap-3 justify-center flex-wrap">
                   {!running ? (
                     <Button onClick={startTest}>
@@ -124,7 +124,7 @@ export default function TestPage() {
                   right={running ? <span className="text-[10px] text-emerald-400 font-mono animate-pulse-dot flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-emerald-400" /> LIVE</span> : undefined}
                 />
                 {feedbacks.length === 0 ? (
-                  <div className="text-center py-8 text-sm text-white/25">
+                  <div className="text-center py-8 text-sm text-[#64748b]">
                     {running ? "Analyzing..." : "Start the test to see real-time AI feedback"}
                   </div>
                 ) : (
@@ -167,7 +167,7 @@ export default function TestPage() {
               <Card>
                 <CardHeader
                   title="Interview Questions"
-                  right={<span className="text-xs text-white/25">{currentQ + 1} / {INTERVIEW_QUESTIONS.length}</span>}
+                  right={<span className="text-xs text-[#64748b]">{currentQ + 1} / {INTERVIEW_QUESTIONS.length}</span>}
                 />
                 <div className="space-y-3">
                   {INTERVIEW_QUESTIONS.map((q, i) => (
@@ -175,14 +175,14 @@ export default function TestPage() {
                       key={q.id}
                       className={`p-4 rounded-xl border transition-all duration-200 cursor-pointer ${
                         i === currentQ
-                          ? "border-[#7c3aed]/30 bg-[#7c3aed]/[0.06]"
+                          ? "border-[#3b82f6]/30 bg-[#3b82f6]/[0.06]"
                           : i < currentQ
                           ? "border-emerald-500/15 bg-emerald-500/[0.03] opacity-60"
                           : "border-white/[0.04] bg-white/[0.01] opacity-40"
                       }`}
                       onClick={() => setCurrentQ(i)}
                     >
-                      <div className="text-[10px] text-white/25 font-medium uppercase tracking-wide mb-1">
+                      <div className="text-[10px] text-[#64748b] font-medium uppercase tracking-wide mb-1">
                         Question {q.id} of {INTERVIEW_QUESTIONS.length}
                         {i < currentQ && " · Done"}
                       </div>

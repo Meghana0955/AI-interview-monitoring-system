@@ -9,11 +9,11 @@ interface StatCardProps {
   className?: string;
 }
 
-export function StatCard({ label, value, sub, icon, accentColor = "#7c3aed", className }: StatCardProps) {
+export function StatCard({ label, value, sub, icon, accentColor = "#3b82f6", className }: StatCardProps) {
   return (
     <div
       className={cn(
-        "relative bg-[#0e0e1a] border border-white/[0.07] rounded-2xl p-5 overflow-hidden transition-all duration-300 hover:border-white/[0.12]",
+        "theme-panel theme-panel-hover theme-glow group relative overflow-hidden rounded-2xl p-5",
         className
       )}
     >
@@ -23,14 +23,15 @@ export function StatCard({ label, value, sub, icon, accentColor = "#7c3aed", cla
         style={{ background: accentColor, boxShadow: `0 0 12px ${accentColor}40` }}
       />
       {/* Subtle glow */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
       <div
-        className="absolute -top-10 -right-10 w-24 h-24 rounded-full opacity-[0.06] blur-2xl pointer-events-none"
+        className="pointer-events-none absolute -right-8 -top-8 h-28 w-28 rounded-full opacity-[0.08] blur-3xl transition-opacity duration-300 group-hover:opacity-[0.14]"
         style={{ background: accentColor }}
       />
       <div className="relative z-10">
         <div className="flex items-center justify-between mb-2">
-          <div className="text-[11px] text-white/35 font-semibold uppercase tracking-[0.18em]">{label}</div>
-          {icon && <div className="text-white/20">{icon}</div>}
+          <div className="text-[11px] text-white/40 font-semibold uppercase tracking-[0.18em]">{label}</div>
+          {icon && <div className="text-white/25">{icon}</div>}
         </div>
         <div
           className="text-3xl font-bold font-mono tracking-tighter mb-1"
@@ -38,7 +39,7 @@ export function StatCard({ label, value, sub, icon, accentColor = "#7c3aed", cla
         >
           {value}
         </div>
-        {sub && <div className="text-xs text-white/30">{sub}</div>}
+        {sub && <div className="text-xs text-white/35">{sub}</div>}
       </div>
     </div>
   );

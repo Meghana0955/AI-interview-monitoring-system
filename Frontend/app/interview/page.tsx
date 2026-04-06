@@ -203,7 +203,7 @@ export default function InterviewPage() {
 
   return (
     <ProtectedRoute>
-    <div className="min-h-screen bg-[#08080f] pt-24">
+    <div className="min-h-screen bg-[#080c14] pt-24">
       <div className="max-w-7xl mx-auto px-4 md:px-6 py-6">
 
         <AnimatePresence mode="wait">
@@ -217,15 +217,15 @@ export default function InterviewPage() {
               className="max-w-2xl mx-auto"
             >
               <div className="text-center mb-8">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#7c3aed] to-[#4c1d95] flex items-center justify-center mx-auto mb-5 shadow-[0_0_40px_rgba(124,58,237,0.2)]">
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#3b82f6] to-[#06b6d4] flex items-center justify-center mx-auto mb-5 shadow-[0_0_40px_rgba(59,130,246,0.2)]">
                   <Monitor className="w-7 h-7 text-white" />
                 </div>
                 <h2 className="text-2xl font-bold tracking-[-0.02em] mb-2 text-white">AI Interview Monitoring</h2>
-                <p className="text-white/35 text-sm">Complete the pre-session checklist below, then click Start to begin.</p>
+                <p className="text-[#64748b] text-sm">Complete the pre-session checklist below, then click Start to begin.</p>
               </div>
 
               <Card className="mb-5">
-                <CardHeader title="Pre-Session Checklist" right={<ClipboardCheck className="w-4 h-4 text-white/20" />} />
+                <CardHeader title="Pre-Session Checklist" right={<ClipboardCheck className="w-4 h-4 text-[#64748b]" />} />
                 <div className="space-y-3">
                   {[
                     { icon: <Camera className="w-4 h-4" />, title: "Camera Access", desc: "Your browser will ask for webcam permission. Make sure your face is clearly visible and well-lit." },
@@ -234,13 +234,13 @@ export default function InterviewPage() {
                     { icon: <User className="w-4 h-4" />, title: "Face Detection", desc: "Stay in frame throughout the session. Don't leave your seat or allow others into the frame." },
                     { icon: <Clock className="w-4 h-4" />, title: "Session Timer", desc: "The monitoring runs in real-time. You can end the session anytime to get your performance report." },
                   ].map((item, i) => (
-                    <div key={i} className="flex gap-3 p-3 rounded-xl bg-white/[0.02] border border-white/[0.04] hover:border-white/[0.08] transition-colors">
-                      <div className="w-8 h-8 rounded-lg bg-[#7c3aed]/10 border border-[#7c3aed]/20 flex items-center justify-center text-[#a78bfa] flex-shrink-0 mt-0.5">
+                    <div key={i} className="flex gap-3 p-3 rounded-xl bg-white/[0.02] border border-white/[0.04] hover:border-[#243655] transition-colors">
+                      <div className="w-8 h-8 rounded-lg bg-[#3b82f6]/10 border border-[#3b82f6]/20 flex items-center justify-center text-[#06b6d4] flex-shrink-0 mt-0.5">
                         {item.icon}
                       </div>
                       <div>
                         <div className="text-sm font-semibold text-white">{item.title}</div>
-                        <div className="text-xs text-white/35 leading-relaxed mt-0.5">{item.desc}</div>
+                        <div className="text-xs text-[#64748b] leading-relaxed mt-0.5">{item.desc}</div>
                       </div>
                     </div>
                   ))}
@@ -248,7 +248,7 @@ export default function InterviewPage() {
               </Card>
 
               <Card className="mb-6">
-                <CardHeader title="How It Works" right={<Settings className="w-4 h-4 text-white/20" />} />
+                <CardHeader title="How It Works" right={<Settings className="w-4 h-4 text-[#64748b]" />} />
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   {[
                     { step: "1", icon: <Camera className="w-4 h-4" />, title: "Capture", desc: "Camera & mic activate in your browser" },
@@ -256,11 +256,11 @@ export default function InterviewPage() {
                     { step: "3", icon: <ClipboardCheck className="w-4 h-4" />, title: "Report", desc: "Get a detailed performance report with AI feedback" },
                   ].map((s, i) => (
                     <div key={i} className="text-center p-4 rounded-xl bg-white/[0.02] border border-white/[0.04]">
-                      <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#7c3aed] to-[#4c1d95] flex items-center justify-center mx-auto mb-2 text-white">
+                      <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#3b82f6] to-[#06b6d4] flex items-center justify-center mx-auto mb-2 text-white">
                         {s.icon}
                       </div>
                       <div className="text-sm font-semibold text-white">{s.title}</div>
-                      <div className="text-[11px] text-white/30 mt-1">{s.desc}</div>
+                      <div className="text-[11px] text-[#64748b] mt-1">{s.desc}</div>
                     </div>
                   ))}
                 </div>
@@ -270,7 +270,7 @@ export default function InterviewPage() {
                 <Button size="lg" onClick={handleStartMonitoring}>
                   <Play className="w-4 h-4" /> Start Monitoring Session
                 </Button>
-                <p className="text-[11px] text-white/20 mt-3">
+                <p className="text-[11px] text-[#64748b] mt-3">
                   By clicking Start, you allow camera & microphone access for AI analysis.
                 </p>
               </div>
@@ -287,11 +287,11 @@ export default function InterviewPage() {
               className="flex flex-col items-center justify-center py-32"
             >
               <div className="relative w-16 h-16 mb-5">
-                <div className="absolute inset-0 rounded-full border-2 border-white/[0.07]" />
-                <div className="absolute inset-0 rounded-full border-2 border-transparent border-t-[#7c3aed] animate-spin" />
+                <div className="absolute inset-0 rounded-full border-2 border-[#1e2d47]" />
+                <div className="absolute inset-0 rounded-full border-2 border-transparent border-t-[#3b82f6] animate-spin" />
               </div>
               <div className="text-lg font-semibold mb-1 text-white">Initializing AI Systems</div>
-              <div className="text-sm text-white/35">Connecting to backend, calibrating microphone...</div>
+              <div className="text-sm text-[#64748b]">Connecting to backend, calibrating microphone...</div>
             </motion.div>
           )}
 
@@ -341,14 +341,14 @@ export default function InterviewPage() {
                         >
                           {riskScore}
                         </div>
-                        <div className="text-xs text-white/30 mt-1 mb-4">Risk Score (0-100)</div>
+                        <div className="text-xs text-[#64748b] mt-1 mb-4">Risk Score (0-100)</div>
                         <div className="h-2 bg-white/[0.06] rounded-full overflow-hidden">
                           <div
                             className="h-full rounded-full transition-all duration-700"
                             style={{ width: `${riskScore}%`, background: getRiskBarColor(riskScore) }}
                           />
                         </div>
-                        <div className="flex justify-between text-[10px] text-white/20 mt-1.5 font-mono">
+                        <div className="flex justify-between text-[10px] text-[#64748b] mt-1.5 font-mono">
                           <span>0 LOW</span><span>50 MED</span><span>100 HIGH</span>
                         </div>
                         <div className="mt-3">
@@ -373,11 +373,11 @@ export default function InterviewPage() {
                                   <Eye className="w-4 h-4" />
                                 </div>
                                 <div>
-                                  <div className="text-[10px] text-white/30 uppercase tracking-wide mb-0.5">Eye Tracking</div>
+                                  <div className="text-[10px] text-[#64748b] uppercase tracking-wide mb-0.5">Eye Tracking</div>
                                   <div className={`text-sm font-semibold ${isNormal ? "text-emerald-300" : "text-amber-300"}`}>
                                     {eyeStatus}
                                   </div>
-                                  <div className="text-[10px] text-white/20 mt-0.5">{eyeViolations} violations detected</div>
+                                  <div className="text-[10px] text-[#64748b] mt-0.5">{eyeViolations} violations detected</div>
                                 </div>
                               </div>
                               <Badge variant={isNormal ? "green" : "amber"}>
@@ -396,11 +396,11 @@ export default function InterviewPage() {
                                   <User className="w-4 h-4" />
                                 </div>
                                 <div>
-                                  <div className="text-[10px] text-white/30 uppercase tracking-wide mb-0.5">Face Detection</div>
+                                  <div className="text-[10px] text-[#64748b] uppercase tracking-wide mb-0.5">Face Detection</div>
                                   <div className={`text-sm font-semibold ${isNormal ? "text-emerald-300" : "text-red-300"}`}>
                                     {faceStatus === "Normal" ? "1 Person · Verified" : faceStatus}
                                   </div>
-                                  <div className="text-[10px] text-white/20 mt-0.5">{faceViolations} violations detected</div>
+                                  <div className="text-[10px] text-[#64748b] mt-0.5">{faceViolations} violations detected</div>
                                 </div>
                               </div>
                               <Badge variant={isNormal ? "green" : "red"}>
@@ -420,17 +420,17 @@ export default function InterviewPage() {
                                   <Mic className="w-4 h-4" />
                                 </div>
                                 <div className="flex-1">
-                                  <div className="text-[10px] text-white/30 uppercase tracking-wide mb-0.5">Voice Analysis</div>
+                                  <div className="text-[10px] text-[#64748b] uppercase tracking-wide mb-0.5">Voice Analysis</div>
                                   <div className={`text-sm font-semibold ${isNormal ? "text-emerald-300" : "text-amber-300"}`}>
                                     {voiceStatus}
                                   </div>
-                                  <div className="text-[10px] text-white/20 mt-0.5">
+                                  <div className="text-[10px] text-[#64748b] mt-0.5">
                                     {voiceViolations} violations · Level: {displayLevel.toFixed(1)}
                                   </div>
                                   {/* Live audio level bar */}
                                   {audioMonitor.active && (
                                     <div className="mt-2 flex items-center gap-2">
-                                      <Volume2 className="w-3 h-3 text-white/20 flex-shrink-0" />
+                                      <Volume2 className="w-3 h-3 text-[#64748b] flex-shrink-0" />
                                       <div className="flex-1 h-1.5 bg-white/[0.06] rounded-full overflow-hidden">
                                         <div
                                           className="h-full rounded-full transition-all duration-150"
@@ -442,7 +442,7 @@ export default function InterviewPage() {
                                           }}
                                         />
                                       </div>
-                                      <span className="text-[9px] font-mono text-white/20 w-6 text-right flex-shrink-0">
+                                      <span className="text-[9px] font-mono text-[#64748b] w-6 text-right flex-shrink-0">
                                         {browserAudioLevel}
                                       </span>
                                     </div>
@@ -466,11 +466,11 @@ export default function InterviewPage() {
                 <Card>
                   <CardHeader
                     title="Live Event Log"
-                    right={<span className="text-[10px] text-white/25 font-mono">{formatTime(elapsed)}</span>}
+                    right={<span className="text-[10px] text-[#64748b] font-mono">{formatTime(elapsed)}</span>}
                   />
                   <div className="max-h-44 overflow-y-auto space-y-1.5">
                     {log.length === 0 ? (
-                      <div className="text-sm text-white/25 text-center py-6">Waiting for AI analysis results...</div>
+                      <div className="text-sm text-[#64748b] text-center py-6">Waiting for AI analysis results...</div>
                     ) : (
                       log.map((e, i) => (
                         <Alert key={i} type={e.type} className={i === 0 ? "animate-slide-right" : ""}>{e.msg}</Alert>

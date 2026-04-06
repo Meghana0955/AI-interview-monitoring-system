@@ -10,19 +10,19 @@ interface BadgeProps {
 }
 
 const styles: Record<BadgeVariant, string> = {
-  green:  "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
-  amber:  "bg-amber-500/10   text-amber-400   border-amber-500/20",
-  red:    "bg-red-500/10     text-red-400     border-red-500/20",
-  blue:   "bg-blue-500/10    text-blue-400    border-blue-500/20",
-  cyan:   "bg-cyan-500/10    text-cyan-400    border-cyan-500/20",
-  purple: "bg-[#7c3aed]/10   text-[#a78bfa]   border-[#7c3aed]/20",
+  green:  "bg-[#10b981]/10 text-[#10b981] border-[#10b981]/25",
+  amber:  "bg-[#f59e0b]/10 text-[#f59e0b] border-[#f59e0b]/25",
+  red:    "bg-[#ef4444]/10 text-[#ef4444] border-[#ef4444]/25",
+  blue:   "bg-[#3b82f6]/10 text-[#3b82f6] border-[#3b82f6]/25",
+  cyan:   "bg-[#06b6d4]/10 text-[#06b6d4] border-[#06b6d4]/25",
+  purple: "bg-[#8b5cf6]/10 text-[#8b5cf6] border-[#8b5cf6]/25",
 };
 
 export function Badge({ variant = "blue", children, className }: BadgeProps) {
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold tracking-wide uppercase border",
+        "inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide backdrop-blur-md",
         styles[variant],
         className
       )}

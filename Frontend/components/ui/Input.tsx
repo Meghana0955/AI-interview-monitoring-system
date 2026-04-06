@@ -9,19 +9,19 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 }
 
 const inputBase =
-  "w-full rounded-xl border border-white/[0.07] bg-[#0d0d14] px-4 py-2.5 text-sm text-white placeholder:text-white/20 outline-none transition-all duration-200 focus:border-[#7c3aed]/60 focus:bg-[#0f0f1a] focus:ring-2 focus:ring-[#7c3aed]/15 hover:border-white/10";
+  "w-full rounded-xl border border-[#1e2d47] bg-[#0d1524] px-4 py-2.5 text-sm text-[#e2e8f0] placeholder:text-[#64748b] outline-none transition-all duration-300 focus:border-[#3b82f6]/60 focus:bg-[#101828] focus:ring-2 focus:ring-[#3b82f6]/20 hover:border-[#243655]";
 
 export function Input({ label, icon, className, ...props }: InputProps) {
   return (
     <div>
       {label && (
-        <label className="mb-1.5 block text-[11px] font-semibold uppercase tracking-[0.18em] text-white/35">
+        <label className="mb-1.5 block text-[11px] font-semibold uppercase tracking-[0.18em] text-white/40">
           {label}
         </label>
       )}
       <div className="relative">
         {icon && (
-          <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-white/20">{icon}</span>
+          <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-white/25">{icon}</span>
         )}
         <input
           className={cn(inputBase, icon && "pl-10", className)}
@@ -41,7 +41,7 @@ export function PasswordInput({ label, className, ...props }: PasswordInputProps
   return (
     <div>
       {label && (
-        <label className="mb-1.5 block text-[11px] font-semibold uppercase tracking-[0.18em] text-white/35">
+        <label className="mb-1.5 block text-[11px] font-semibold uppercase tracking-[0.18em] text-white/40">
           {label}
         </label>
       )}
@@ -54,7 +54,7 @@ export function PasswordInput({ label, className, ...props }: PasswordInputProps
         <button
           type="button"
           onClick={() => setShow((p) => !p)}
-          className="absolute right-3 top-1/2 -translate-y-1/2 text-white/25 hover:text-white/60 transition-colors"
+          className="absolute right-3 top-1/2 -translate-y-1/2 text-white/25 transition-colors hover:text-white/70"
         >
           {show ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
         </button>
@@ -72,7 +72,7 @@ export function Select({ label, options, className, ...props }: SelectProps) {
   return (
     <div>
       {label && (
-        <label className="mb-1.5 block text-[11px] font-semibold uppercase tracking-[0.18em] text-white/35">
+        <label className="mb-1.5 block text-[11px] font-semibold uppercase tracking-[0.18em] text-white/40">
           {label}
         </label>
       )}
@@ -81,7 +81,7 @@ export function Select({ label, options, className, ...props }: SelectProps) {
         {...props}
       >
         {options.map((opt) => (
-          <option key={opt.value} value={opt.value} className="bg-[#0d0d14]">
+          <option key={opt.value} value={opt.value} className="bg-[#0d1524]">
             {opt.label}
           </option>
         ))}

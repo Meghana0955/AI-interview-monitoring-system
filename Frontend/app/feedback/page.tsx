@@ -26,9 +26,9 @@ const FALLBACK_RECOMMENDATIONS = [
   {
     icon: <Eye className="w-4 h-4" />,
     category: "Eye Contact",
-    color: "#7c3aed",
-    bg: "rgba(124,58,237,.06)",
-    border: "rgba(124,58,237,.2)",
+    color: "#3b82f6",
+    bg: "rgba(59,130,246,.06)",
+    border: "rgba(59,130,246,.2)",
     msg: "Maintain consistent gaze toward the camera. Your eye deviated 7 times — practice focusing on a fixed center point during responses.",
     compliance: 62,
   },
@@ -62,11 +62,11 @@ const CATEGORY_ICONS: Record<string, React.ReactNode> = {
 };
 
 const CATEGORY_CONFIG: Record<string, { color: string; bg: string; border: string }> = {
-  "Eye Contact":       { color: "#7c3aed", bg: "rgba(124,58,237,.06)",   border: "rgba(124,58,237,.2)" },
+  "Eye Contact":       { color: "#3b82f6", bg: "rgba(59,130,246,.06)",   border: "rgba(59,130,246,.2)" },
   "Audio Environment": { color: "#8b5cf6", bg: "rgba(139,92,246,.06)", border: "rgba(139,92,246,.2)" },
   "Face Presence":     { color: "#10b981", bg: "rgba(16,185,129,.06)", border: "rgba(16,185,129,.2)" },
   "Focus & Discipline":{ color: "#f59e0b", bg: "rgba(245,158,11,.06)", border: "rgba(245,158,11,.2)" },
-  "General":           { color: "#a78bfa", bg: "rgba(167,139,250,.06)", border: "rgba(167,139,250,.2)" },
+  "General":           { color: "#06b6d4", bg: "rgba(6,182,212,.06)", border: "rgba(6,182,212,.2)" },
   "No Data":           { color: "#ef4444", bg: "rgba(239,68,68,.06)",  border: "rgba(239,68,68,.2)" },
 };
 
@@ -200,7 +200,7 @@ export default function FeedbackPage() {
 
   return (
     <ProtectedRoute>
-    <div className="min-h-screen bg-[#08080f] pt-24">
+    <div className="min-h-screen bg-[#080c14] pt-24">
       <div className="max-w-7xl mx-auto px-4 md:px-6 py-6">
 
         <PageHeader
@@ -233,7 +233,7 @@ export default function FeedbackPage() {
                 >
                   {avgRisk}
                 </div>
-                <div className="text-xs text-white/30 mt-1">Average Risk Score</div>
+                <div className="text-xs text-[#64748b] mt-1">Average Risk Score</div>
               </div>
               <div className="flex-1 min-w-[200px]">
                 <div
@@ -247,7 +247,7 @@ export default function FeedbackPage() {
                   <EvalIcon className="w-4 h-4" />
                   {evalLabel}
                 </div>
-                <p className="text-sm text-white/50 leading-relaxed">
+                <p className="text-sm text-[#94a3b8] leading-relaxed">
                   {evaluation === "good"
                     ? "Excellent session! The candidate maintained good eye contact, stayed visible, and had minimal audio disruptions."
                     : evaluation === "high_risk"
@@ -257,7 +257,7 @@ export default function FeedbackPage() {
               </div>
               <div className="text-center">
                 <div className="text-3xl font-bold font-mono text-emerald-400">{integrityScore}%</div>
-                <div className="text-[11px] text-white/25 mt-0.5">Integrity Score</div>
+                <div className="text-[11px] text-[#64748b] mt-0.5">Integrity Score</div>
               </div>
             </motion.div>
 
@@ -266,8 +266,8 @@ export default function FeedbackPage() {
               initial={{ opacity:0,y:12 }} animate={{ opacity:1,y:0 }} transition={{ delay:0.15 }}
               className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-6"
             >
-              <StatCard label="Eye Issues" value={eyeIssues} sub={`${Math.max(0, eyeIssues - 2)} critical`} icon={<Eye className="w-4 h-4" />} accentColor="#7c3aed" />
-              <StatCard label="Face Issues" value={faceIssues} sub="Absence events" icon={<User className="w-4 h-4" />} accentColor="#a78bfa" />
+              <StatCard label="Eye Issues" value={eyeIssues} sub={`${Math.max(0, eyeIssues - 2)} critical`} icon={<Eye className="w-4 h-4" />} accentColor="#3b82f6" />
+              <StatCard label="Face Issues" value={faceIssues} sub="Absence events" icon={<User className="w-4 h-4" />} accentColor="#06b6d4" />
               <StatCard label="Voice Issues" value={voiceIssues} sub="Background noise" icon={<Mic className="w-4 h-4" />} accentColor="#8b5cf6" />
               <StatCard label="Clean Periods" value={`${Math.max(30, 100 - (eyeIssues + faceIssues + voiceIssues) * 3)}%`} sub="No violations" icon={<CheckCircle className="w-4 h-4" />} accentColor="#10b981" />
             </motion.div>
@@ -287,7 +287,7 @@ export default function FeedbackPage() {
                         <div className="flex items-center gap-2 text-xs font-semibold mb-2" style={{ color: r.color }}>
                           {r.icon} {r.category}
                         </div>
-                        <p className="text-sm text-white/50 leading-relaxed mb-3">{r.msg}</p>
+                        <p className="text-sm text-[#94a3b8] leading-relaxed mb-3">{r.msg}</p>
                         <ProgressBar
                           value={r.compliance}
                           color={r.color}
@@ -323,7 +323,7 @@ export default function FeedbackPage() {
               className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3"
             >
               {[
-                { icon: <Eye className="w-6 h-6" />, label: "Eye Contact",  score: Math.max(20, 100 - eyeIssues * 5), color: "#7c3aed", verdict: eyeIssues < 3 ? "Good" : eyeIssues < 8 ? "Fair" : "Poor" },
+                { icon: <Eye className="w-6 h-6" />, label: "Eye Contact",  score: Math.max(20, 100 - eyeIssues * 5), color: "#3b82f6", verdict: eyeIssues < 3 ? "Good" : eyeIssues < 8 ? "Fair" : "Poor" },
                 { icon: <Mic className="w-6 h-6" />, label: "Voice Control", score: Math.max(20, 100 - voiceIssues * 5), color: "#8b5cf6", verdict: voiceIssues < 3 ? "Excellent" : voiceIssues < 8 ? "Good" : "Fair" },
                 { icon: <User className="w-6 h-6" />, label: "Face Presence", score: Math.max(20, 100 - faceIssues * 8), color: "#10b981", verdict: faceIssues < 2 ? "Excellent" : faceIssues < 5 ? "Good" : "Fair" },
               ].map((item, i) => (
@@ -331,7 +331,7 @@ export default function FeedbackPage() {
                   <div className="w-12 h-12 rounded-xl mx-auto mb-3 flex items-center justify-center" style={{ background: `${item.color}10`, color: item.color, border: `1px solid ${item.color}20` }}>
                     {item.icon}
                   </div>
-                  <div className="text-xs text-white/25 uppercase tracking-[0.15em] mb-1">{item.label}</div>
+                  <div className="text-xs text-[#64748b] uppercase tracking-[0.15em] mb-1">{item.label}</div>
                   <div className="text-2xl font-bold font-mono mb-1" style={{ color: item.color }}>{item.score}%</div>
                   <div className="text-xs font-semibold" style={{ color: item.color }}>{item.verdict}</div>
                   <ProgressBar value={item.score} color={item.color} className="mt-3" />

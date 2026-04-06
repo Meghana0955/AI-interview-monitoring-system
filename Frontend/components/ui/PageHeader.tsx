@@ -10,14 +10,14 @@ interface PageHeaderProps {
 
 export function PageHeader({ title, subtitle, badge, actions }: PageHeaderProps) {
   return (
-    <div className="flex flex-wrap items-start justify-between gap-4 mb-6">
+    <div className="mb-6 flex flex-wrap items-start justify-between gap-4">
       <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
-        <div className="flex items-center gap-3 mb-1">
-          <h1 className="text-xl font-bold tracking-[-0.02em] text-white">{title}</h1>
+        <div className="mb-1 flex items-center gap-3">
+          <h1 className="text-xl font-bold tracking-[-0.02em] text-white sm:text-2xl">{title}</h1>
           {badge}
         </div>
         {subtitle && (
-          <p className="text-[11px] text-white/30 font-mono tracking-wide">{subtitle}</p>
+          <p className="font-mono text-[11px] tracking-wide text-white/35">{subtitle}</p>
         )}
       </motion.div>
       {actions && (

@@ -10,10 +10,10 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variants: Record<ButtonVariant, string> = {
-  primary: "bg-[#7c3aed] text-white hover:bg-[#6d28d9] shadow-[0_4px_24px_rgba(124,58,237,0.4)] hover:shadow-[0_6px_32px_rgba(124,58,237,0.55)] hover:-translate-y-0.5",
-  outline: "bg-transparent text-white/60 border border-white/[0.07] hover:border-[#7c3aed]/40 hover:text-[#a78bfa] hover:bg-[#7c3aed]/5",
-  ghost:   "bg-transparent text-white/40 hover:text-white hover:bg-white/5",
-  danger:  "bg-red-500/10 text-red-400 border border-red-500/20 hover:bg-red-500/20 hover:border-red-500/40",
+  primary: "bg-gradient-to-r from-[#3b82f6] via-[#06b6d4] to-[#3b82f6] text-white shadow-[0_8px_28px_rgba(59,130,246,0.32)] hover:shadow-[0_12px_36px_rgba(6,182,212,0.48)] hover:-translate-y-0.5",
+  outline: "bg-white/[0.02] text-[#94a3b8] border border-[#1e2d47] hover:border-[#243655] hover:text-[#e2e8f0] hover:bg-[#3b82f6]/5",
+  ghost:   "bg-transparent text-[#64748b] hover:text-[#e2e8f0] hover:bg-white/[0.04]",
+  danger:  "bg-[#ef4444]/10 text-[#ef4444] border border-[#ef4444]/20 hover:bg-[#ef4444]/20 hover:border-[#ef4444]/40",
 };
 
 const sizes: Record<ButtonSize, string> = {
@@ -32,7 +32,7 @@ export function Button({
   return (
     <button
       className={cn(
-        "inline-flex items-center justify-center gap-2 rounded-xl font-semibold tracking-wide transition-all duration-200 active:scale-[.97] disabled:opacity-50 disabled:cursor-not-allowed",
+        "inline-flex items-center justify-center gap-2 rounded-xl border border-transparent px-4 py-2 font-semibold tracking-wide transition-all duration-300 active:scale-[.97] disabled:cursor-not-allowed disabled:opacity-50",
         variants[variant],
         sizes[size],
         className

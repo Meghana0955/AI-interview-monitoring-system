@@ -10,13 +10,14 @@ export function Card({ children, className, glass, hover, ...props }: CardProps)
   return (
     <div
       className={cn(
-        "rounded-2xl border border-white/[0.07] p-5 transition-all duration-300",
-        glass ? "bg-[#0e0e1a]/85 backdrop-blur-md" : "bg-[#0e0e1a]",
-        hover && "hover:border-[#7c3aed]/30 hover:-translate-y-0.5 hover:shadow-[0_8px_32px_rgba(124,58,237,0.08)]",
+        "theme-panel theme-panel-hover theme-glow relative overflow-hidden rounded-2xl p-5",
+        glass ? "bg-[#101828]/80" : "bg-[#101828]",
+        hover && "hover:border-[#243655] hover:-translate-y-0.5",
         className
       )}
       {...props}
     >
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
       {children}
     </div>
   );
@@ -32,8 +33,8 @@ export function CardHeader({
   className?: string;
 }) {
   return (
-    <div className={cn("flex items-center justify-between mb-4", className)}>
-      <h3 className="text-[11px] font-semibold text-white/40 uppercase tracking-[0.18em]">{title}</h3>
+    <div className={cn("mb-4 flex items-center justify-between gap-3", className)}>
+      <h3 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#64748b]">{title}</h3>
       {right && <div>{right}</div>}
     </div>
   );
